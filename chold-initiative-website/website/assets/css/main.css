@@ -741,14 +741,18 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
 }
 
 /* --------------------------------------------------------------------------
-   Rotating Africa Map Illustration
+   Rotating & Pulsing User Africa Silhouette SVG Illustration
    -------------------------------------------------------------------------- */
 .africa-globe-orbit {
-  transform-origin: 100px 100px;
+  transform-origin: 500px 550px;
   animation: globeSpin 36s linear infinite;
 }
+.africa-map-pulse {
+  transform-origin: 500px 550px;
+  animation: africaFloat 6s ease-in-out infinite alternate;
+}
 .africa-pulse-glow {
-  transform-origin: 100px 100px;
+  transform-origin: 500px 550px;
   animation: africaPulse 4s ease-in-out infinite alternate;
 }
 .africa-node-ping {
@@ -758,16 +762,20 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+@keyframes africaFloat {
+  0% { transform: translateY(0px) scale(1); }
+  100% { transform: translateY(-10px) scale(1.02); }
+}
 @keyframes africaPulse {
   0% { opacity: 0.04; transform: scale(0.96); }
-  100% { opacity: 0.12; transform: scale(1.06); }
+  100% { opacity: 0.14; transform: scale(1.05); }
 }
 @keyframes nodePulse {
   0% { opacity: 0.5; }
   100% { opacity: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .africa-globe-orbit, .africa-pulse-glow, .africa-node-ping {
+  .africa-globe-orbit, .africa-map-pulse, .africa-pulse-glow, .africa-node-ping {
     animation: none !important;
   }
 }
