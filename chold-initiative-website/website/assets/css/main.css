@@ -919,6 +919,60 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
   margin: 0;
 }
 
+/* --------------------------------------------------------------------------
+   Floating 3-Image Showcase (Replaces Marquee Strip)
+   -------------------------------------------------------------------------- */
+.floating-image-showcase {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.75rem;
+  padding-block: 3.5rem;
+}
+
+@media (max-width: 768px) {
+  .floating-image-showcase {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
+.floating-image-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(19, 80, 27, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+  animation: bentoFloat 5s ease-in-out infinite;
+}
+
+.floating-image-card:nth-child(1) { animation-delay: 0s; }
+.floating-image-card:nth-child(2) { animation-delay: 1.2s; }
+.floating-image-card:nth-child(3) { animation-delay: 2.4s; }
+
+.floating-image-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  transition: transform 0.4s var(--ease);
+}
+
+.floating-image-card:hover {
+  animation-play-state: paused;
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 18px 42px rgba(19, 80, 27, 0.22);
+}
+
+.floating-image-card:hover img {
+  transform: scale(1.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floating-image-card {
+    animation: none !important;
+  }
+}
+
 /* Featured bio */
 .bio {
   display: grid; grid-template-columns: 300px 1fr;
