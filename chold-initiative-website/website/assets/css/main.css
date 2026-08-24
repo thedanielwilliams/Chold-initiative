@@ -580,7 +580,8 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
 
 .stat-card {
   background: #fff; border: 1px solid var(--line); border-radius: var(--r-md);
-  padding: 1.5rem 1.4rem; height: 100%;
+  padding: 1.75rem; height: 100%;
+  display: flex; flex-direction: column; justify-content: center;
   transition: transform .3s var(--ease), box-shadow .3s var(--ease);
 }
 .stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
@@ -588,7 +589,7 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
   font-family: var(--font-display); font-weight: 800; letter-spacing: -.035em;
   font-size: clamp(1.85rem, 1.35rem + 1.7vw, 2.6rem); color: var(--green-700); line-height: 1;
 }
-.stat-card .lbl { font-size: var(--fs-sm); margin-top: .65rem; }
+.stat-card .lbl { font-size: var(--fs-sm); margin-top: .75rem; color: var(--ink-soft); }
 
 /* --------------------------------------------------------------------------
    10. Split feature blocks
