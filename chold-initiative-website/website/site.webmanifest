@@ -1,0 +1,13 @@
+{
+  "name": "CHOLD Initiative — Center for Holistic Livestock Development Initiative",
+  "short_name": "CHOLD Initiative",
+  "description": "Transforming livestock systems across Africa through data intelligence, disease resilience and sustainable development.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#13501B",
+  "icons": [
+    { "src": "/assets/img/logo-mark.png", "sizes": "560x580", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/img/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

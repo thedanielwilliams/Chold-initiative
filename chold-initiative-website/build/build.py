@@ -1,0 +1,244 @@
+#!/usr/bin/env python3
+"""
+CHOLD Initiative — static site builder.
+
+Assembles the shared header, footer and <head> around each page's body content
+and writes plain, dependency-free HTML files into ../site/.
+
+Usage:  python3 build.py
+"""
+import json
+import os
+import re
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+SITE = os.path.normpath(os.path.join(HERE, '..', 'site'))
+PAGES = os.path.join(HERE, 'pages')
+BASE_URL = 'https://choldinitiative.org'
+
+NAV = [
+    ('about.html', 'About'),
+    ('what-we-do.html', 'What We Do'),
+    ('impact.html', 'Impact'),
+    ('leadership.html', 'Leadership'),
+    ('news.html', 'News &amp; Insights'),
+    ('careers.html', 'Careers'),
+]
+
+ORG_JSONLD = {
+    "@context": "https://schema.org",
+    "@type": "NGO",
+    "name": "Center for Holistic Livestock Development Initiative",
+    "alternateName": "CHOLD Initiative",
+    "url": BASE_URL + "/",
+    "logo": BASE_URL + "/assets/img/logo-mark.png",
+    "email": "info@choldinitiative.org",
+    "telephone": "+234-081-71111551",
+    "foundingDate": "2018",
+    "slogan": "Empowering Livestock Communities, Securing Africa's Future",
+    "description": "A non-profit organisation transforming livestock ecosystems through "
+                   "innovation, research, data intelligence and inclusive leadership engagement.",
+    "address": {"@type": "PostalAddress", "addressLocality": "Abuja", "addressCountry": "NG"},
+    "areaServed": {"@type": "Place", "name": "Africa"},
+}
+
+HEAD = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+<meta name="description" content="{description}">
+<link rel="canonical" href="{base}/{slug}">
+<meta name="theme-color" content="#13501B">
+
+<meta property="og:type" content="{ogtype}">
+<meta property="og:site_name" content="CHOLD Initiative">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{description}">
+<meta property="og:url" content="{base}/{slug}">
+<meta property="og:image" content="{base}/assets/img/{ogimage}">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/logo-mark.png">
+<link rel="manifest" href="site.webmanifest">
+
+<link rel="preload" href="assets/fonts/plus-jakarta-sans-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/main.css">
+
+<script type="application/ld+json">
+{jsonld}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+"""
+
+HEADER = """
+<header class="site-header{overhero}">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html" aria-label="CHOLD Initiative — home">
+      <img class="logo-dark" src="assets/img/logo-mark.png" alt="" width="42" height="44">
+      <img class="logo-light" src="assets/img/logo-mark-white.png" alt="" width="42" height="44">
+      <span class="brand-text">
+        <span class="brand-name">CHOLD Initiative</span>
+        <span class="brand-sub">Holistic Livestock Development</span>
+      </span>
+    </a>
+
+    <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+{navlinks}
+      <a class="btn btn-primary btn-sm" href="contact.html">Partner With Us</a>
+    </nav>
+
+    <a class="btn btn-primary btn-sm header-cta" href="contact.html">Partner With Us</a>
+  </div>
+</header>
+
+<main id="main">
+"""
+
+FOOTER = """
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/img/logo-mark-white.png" alt="" width="46" height="48">
+          <div>
+            <div class="n">CHOLD Initiative</div>
+            <div class="s">Est. 2018 &middot; Abuja, Nigeria</div>
+          </div>
+        </div>
+        <p style="max-width:38ch">
+          Center for Holistic Livestock Development Initiative &mdash; expertise in data-driven
+          solutions, disease resilience and sustainable development.
+        </p>
+        <div class="social">
+          <a href="https://www.linkedin.com/" aria-label="CHOLD Initiative on LinkedIn" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3zM9.5 9h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.76V21h-4v-5.6c0-1.34-.02-3.07-1.9-3.07-1.9 0-2.2 1.45-2.2 2.97V21h-4z"/></svg></a>
+          <a href="https://www.facebook.com/" aria-label="CHOLD Initiative on Facebook" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5h1.65V3.6c-.3-.04-1.3-.13-2.45-.13-2.43 0-4.1 1.48-4.1 4.2v2.23H7.4V13h2.75v8z"/></svg></a>
+          <a href="https://x.com/" aria-label="CHOLD Initiative on X (formerly Twitter)" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 3h3.1l-6.8 7.8L21.8 21h-6.2l-4.9-6.4L5.1 21H2l7.3-8.3L2.4 3h6.4l4.4 5.8Zm-1.1 16.1h1.7L7.7 4.8H5.9Z"/></svg></a>
+        </div>
+      </div>
+
+      <div>
+        <h5>Organisation</h5>
+        <ul class="footer-links">
+          <li><a href="about.html">About us</a></li>
+          <li><a href="leadership.html">Board &amp; team</a></li>
+          <li><a href="impact.html">Impact</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="news.html">News &amp; insights</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5>Our work</h5>
+        <ul class="footer-links">
+          <li><a href="what-we-do.html#lims">Livestock data systems</a></li>
+          <li><a href="what-we-do.html#surveillance">Disease surveillance</a></li>
+          <li><a href="what-we-do.html#traditional">Traditional leadership</a></li>
+          <li><a href="what-we-do.html#research">Research &amp; innovation</a></li>
+          <li><a href="what-we-do.html#government">Government strengthening</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5>Contact</h5>
+        <ul class="footer-links">
+          <li>Abuja, Federal Capital Territory<br>Nigeria</li>
+          <li><a href="mailto:info@choldinitiative.org">info@choldinitiative.org</a></li>
+          <li><a href="tel:+2348171111551">+234 (081) 7111 1551</a></li>
+          <li style="margin-top:1.1rem"><a class="btn btn-gold btn-sm" href="contact.html">Partner with us</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; <span data-year>2026</span> Center for Holistic Livestock Development Initiative. All rights reserved.</div>
+      <div class="footer-legal">
+        <a href="privacy.html">Privacy notice</a>
+        <a href="assets/docs/CHOLD-Initiative-Profile.pdf" download>Organisational profile (PDF)</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>
+"""
+
+
+def nav_html(active):
+    out = []
+    for href, label in NAV:
+        cls = 'nav-link is-active' if href == active else 'nav-link'
+        out.append('      <a class="%s" href="%s">%s</a>' % (cls, href, label))
+    return '\n'.join(out)
+
+
+def parse_front_matter(text):
+    m = re.match(r'^---\n(.*?)\n---\n', text, re.S)
+    meta, body = {}, text
+    if m:
+        for line in m.group(1).split('\n'):
+            if ':' in line:
+                k, v = line.split(':', 1)
+                meta[k.strip()] = v.strip()
+        body = text[m.end():]
+    return meta, body
+
+
+def build():
+    written = []
+    for name in sorted(os.listdir(PAGES)):
+        if not name.endswith('.html'):
+            continue
+        with open(os.path.join(PAGES, name), encoding='utf-8') as f:
+            meta, body = parse_front_matter(f.read())
+
+        slug = meta.get('slug', name)
+        jsonld = meta.get('jsonld')
+        if jsonld:
+            with open(os.path.join(PAGES, jsonld), encoding='utf-8') as jf:
+                jsonld_text = jf.read().strip()
+        else:
+            jsonld_text = json.dumps(ORG_JSONLD, indent=2)
+
+        html = HEAD.format(
+            title=meta.get('title', 'CHOLD Initiative'),
+            description=meta.get('description', ''),
+            base=BASE_URL,
+            slug='' if slug == 'index.html' else slug,
+            ogtype=meta.get('ogtype', 'website'),
+            ogimage=meta.get('ogimage', 'hero-pastoral.jpg'),
+            jsonld=jsonld_text,
+        )
+        html += HEADER.format(
+            overhero='' if meta.get('overhero') == 'false' else ' is-over-hero',
+            navlinks=nav_html(meta.get('active', '')),
+        )
+        html += body.rstrip() + '\n'
+        html += FOOTER
+
+        with open(os.path.join(SITE, slug), 'w', encoding='utf-8') as f:
+            f.write(html)
+        written.append(slug)
+    print('Built %d pages: %s' % (len(written), ', '.join(written)))
+
+
+if __name__ == '__main__':
+    build()
