@@ -20,7 +20,6 @@ NAV = [
     ('about.html', 'About'),
     ('what-we-do.html', 'What We Do'),
     ('impact.html', 'Impact'),
-    ('leadership.html', 'Leadership'),
     ('news.html', 'News &amp; Insights'),
     ('careers.html', 'Careers'),
 ]
@@ -132,7 +131,7 @@ FOOTER = """
         <h5>Organisation</h5>
         <ul class="footer-links">
           <li><a href="about.html">About us</a></li>
-          <li><a href="leadership.html">Board &amp; team</a></li>
+          <li><a href="about.html#leadership">Board &amp; leadership</a></li>
           <li><a href="impact.html">Impact</a></li>
           <li><a href="careers.html">Careers</a></li>
           <li><a href="news.html">News &amp; insights</a></li>
