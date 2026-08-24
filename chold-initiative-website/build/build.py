@@ -84,7 +84,6 @@ HEADER = """
       <img class="logo-light" src="assets/img/logo-mark-white.png" alt="" width="42" height="44">
       <span class="brand-text">
         <span class="brand-name">CHOLD Initiative</span>
-        <span class="brand-sub">Holistic Livestock Development</span>
       </span>
     </a>
 
