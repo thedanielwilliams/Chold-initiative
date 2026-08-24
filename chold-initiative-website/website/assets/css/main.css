@@ -1419,7 +1419,7 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
 }
 
 /* --------------------------------------------------------------------------
-   20. Motion
+   20. Motion (Line-by-Line Mask Reveal & Block Fade-Up)
    -------------------------------------------------------------------------- */
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
 .reveal.is-in { opacity: 1; transform: none; }
@@ -1429,13 +1429,92 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
 .reveal-d4 { transition-delay: .32s; }
 .reveal-d5 { transition-delay: .4s; }
 
+/* Line Mask Reveal for Headings */
+.mask-heading {
+  display: block;
+}
+
+.mask-line {
+  display: block;
+  overflow: hidden;
+  line-height: 1.25;
+}
+
+.mask-line > span,
+.mask-line-text {
+  display: inline-block;
+  transform: translateY(115%);
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.is-in .mask-line > span,
+.is-in.mask-line-text,
+.is-in .mask-line-text {
+  transform: translateY(0);
+}
+
+/* Paragraph & Block Fade-Up */
+.fade-up-block {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+}
+
+.is-in .fade-up-block,
+.fade-up-block.is-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Pillar Node Sequence (Ghost Num -> Masked Heading -> Body & Meta) */
+.pillar-node .pillar-ghost-num {
+  opacity: 0;
+  transform: scale(0.88);
+  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+}
+
+.pillar-node.is-in .pillar-ghost-num {
+  opacity: 0.22;
+  transform: scale(1);
+}
+
+/* Internal Pillar element sequence delays */
+.pillar-node .mask-line > span { transition-delay: 0.08s; }
+.pillar-node .fade-up-block { transition-delay: 0.18s; }
+.pillar-node .pillar-caps-meta { transition-delay: 0.26s; }
+
+/* Column Stagger (120ms intervals left to right) */
+.pillar-node.reveal-d1 .pillar-ghost-num { transition-delay: 0.12s; }
+.pillar-node.reveal-d1 .mask-line > span { transition-delay: 0.20s; }
+.pillar-node.reveal-d1 p { transition-delay: 0.30s; }
+.pillar-node.reveal-d1 .pillar-caps-meta { transition-delay: 0.38s; }
+
+.pillar-node.reveal-d2 .pillar-ghost-num { transition-delay: 0.24s; }
+.pillar-node.reveal-d2 .mask-line > span { transition-delay: 0.32s; }
+.pillar-node.reveal-d2 p { transition-delay: 0.42s; }
+.pillar-node.reveal-d2 .pillar-caps-meta { transition-delay: 0.50s; }
+
+.pillar-node.reveal-d3 .pillar-ghost-num { transition-delay: 0.36s; }
+.pillar-node.reveal-d3 .mask-line > span { transition-delay: 0.44s; }
+.pillar-node.reveal-d3 p { transition-delay: 0.54s; }
+.pillar-node.reveal-d3 .pillar-caps-meta { transition-delay: 0.62s; }
+
+.pillar-node.reveal-d4 .pillar-ghost-num { transition-delay: 0.48s; }
+.pillar-node.reveal-d4 .mask-line > span { transition-delay: 0.56s; }
+.pillar-node.reveal-d4 p { transition-delay: 0.66s; }
+.pillar-node.reveal-d4 .pillar-caps-meta { transition-delay: 0.74s; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: .001ms !important; animation-iteration-count: 1 !important;
     transition-duration: .001ms !important; scroll-behavior: auto !important;
   }
-  .reveal { opacity: 1; transform: none; }
+  .reveal, .mask-line > span, .mask-line-text, .fade-up-block, .pillar-ghost-num, .pillar-caps-meta {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 /* --------------------------------------------------------------------------
