@@ -728,14 +728,124 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
 }
 
 /* --------------------------------------------------------------------------
-   13. Timeline / process
+   13. Pillars / Stepped Process
    -------------------------------------------------------------------------- */
-.pillars { display: grid; grid-template-columns: repeat(auto-fit,minmax(210px,1fr)); gap: 0; border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; background: var(--line); gap: 1px; }
-.pillar { background: #fff; padding: 1.7rem 1.4rem; transition: background .3s var(--ease); }
-.pillar:hover { background: var(--green-050); }
-.pillar .p-num { font-family: var(--font-display); font-weight: 800; font-size: .8rem; color: var(--gold-600); letter-spacing: .1em; margin-bottom: .9rem; }
-.pillar h4 { margin-bottom: .55rem; }
-.pillar p { font-size: var(--fs-sm); }
+.pillars-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.pillars-stepped-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: clamp(1.2rem, 0.8rem + 1vw, 2.2rem);
+  align-items: start;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+/* Individual Pillar Node */
+.pillar-node {
+  position: relative;
+  padding: 0.2rem;
+  background: transparent;
+  border: none;
+}
+
+/* Stepped vertical rhythm on desktop: odd sit higher, even drop lower */
+@media (min-width: 901px) {
+  .pillar-offset-down {
+    margin-top: 3.5rem;
+  }
+}
+
+/* Large Ghosted Number */
+.pillar-ghost-num {
+  font-family: var(--font-display);
+  font-size: clamp(3.8rem, 3.2rem + 2vw, 5.2rem);
+  font-weight: 800;
+  line-height: 0.9;
+  color: var(--green-900);
+  opacity: 0.12;
+  margin-bottom: -0.85rem;
+  letter-spacing: -0.04em;
+  user-select: none;
+  pointer-events: none;
+}
+
+.pillar-content {
+  position: relative;
+  z-index: 1;
+}
+
+.pillar-content h4 {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1rem + 0.35vw, 1.25rem);
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.55rem;
+}
+
+.pillar-content p {
+  font-size: var(--fs-xs);
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin-bottom: 0.85rem;
+}
+
+/* Sub-capabilities supporting list under description */
+.pillar-caps-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  border-top: 1px dashed rgba(0, 0, 0, 0.14);
+  padding-top: 0.75rem;
+}
+
+.pillar-caps-list li {
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.pillar-caps-list a {
+  color: var(--green-700);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.22s var(--ease);
+  position: relative;
+  padding-left: 0.85rem;
+}
+
+.pillar-caps-list a::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--gold-600);
+}
+
+.pillar-caps-list a:hover {
+  color: var(--gold-600);
+}
+
+/* Responsive (Mobile Stack) */
+@media (max-width: 900px) {
+  .pillars-stepped-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .pillar-offset-down {
+    margin-top: 0;
+  }
+
+  .pillar-ghost-num {
+    font-size: 4rem;
+    margin-bottom: -0.75rem;
+  }
+}
 
 /* --------------------------------------------------------------------------
    14. News
