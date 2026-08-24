@@ -935,7 +935,8 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
 .cta-band {
   position: relative; isolation: isolate; overflow: hidden;
   background: var(--green-800); color: rgba(255,255,255,.85);
-  padding-block: clamp(3.2rem, 2rem + 4.5vw, 5.5rem);
+  padding-top: clamp(3.5rem, 2.5rem + 3.5vw, 5.5rem);
+  padding-bottom: clamp(4rem, 3rem + 4vw, 6rem);
 }
 .cta-band::before {
   content: ''; position: absolute; z-index: -1; inset: 0;
@@ -1009,7 +1010,7 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
 /* --------------------------------------------------------------------------
    19. Footer
    -------------------------------------------------------------------------- */
-.site-footer { background: #051809; border-top: 1px solid rgba(255,255,255,.12); color: rgba(255,255,255,.62); padding-top: clamp(3rem,2rem+3vw,4.5rem); font-size: var(--fs-sm); }
+.site-footer { background: #051809; border-top: 1px solid rgba(255,255,255,.12); color: rgba(255,255,255,.62); padding-top: clamp(4.5rem, 3.2rem + 4vw, 6.5rem); font-size: var(--fs-sm); }
 .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1.4fr; gap: clamp(1.6rem,1rem+2.4vw,3.2rem); padding-bottom: 3rem; }
 @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr; } }
