@@ -827,19 +827,38 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
   }
 }
 
+/* Ambient Floating Animation for Sailing Ships Metaphor */
+@keyframes bentoFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(0.35deg);
+  }
+}
+
 .value-card {
   position: relative;
   background: #FFFFFF;
   border-radius: 20px;
   padding: 2.25rem 2rem;
-  border: none;
-  box-shadow: 0 2px 4px rgba(26, 58, 26, 0.04), 0 12px 32px rgba(26, 58, 26, 0.08);
-  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  border: 1px solid rgba(26, 58, 26, 0.06);
+  box-shadow: 0 4px 12px rgba(26, 58, 26, 0.04), 0 14px 32px rgba(26, 58, 26, 0.07);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s var(--ease);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  animation: bentoFloat 5s ease-in-out infinite;
 }
+
+/* Stagger floating delays so cards bob gently like ships sailing */
+.values-bento-grid article:nth-child(1) { animation-delay: 0s; }
+.values-bento-grid article:nth-child(2) { animation-delay: 0.8s; }
+.values-bento-grid article:nth-child(3) { animation-delay: 1.6s; }
+.values-bento-grid article:nth-child(4) { animation-delay: 0.4s; }
+.values-bento-grid article:nth-child(5) { animation-delay: 1.2s; }
+.values-bento-grid article:nth-child(6) { animation-delay: 2.0s; }
 
 .value-card::before {
   content: "";
@@ -853,36 +872,20 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
 }
 
 .value-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 4px 8px rgba(26, 58, 26, 0.06), 0 20px 40px rgba(26, 58, 26, 0.12);
+  animation-play-state: paused;
+  transform: translateY(-12px) scale(1.015);
+  box-shadow: 0 8px 16px rgba(26, 58, 26, 0.06), 0 24px 48px rgba(26, 58, 26, 0.12);
+  border-color: rgba(26, 58, 26, 0.15);
 }
 
 .value-card:hover::before {
   background: #1A3A1A;
 }
 
-.value-badge {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: #1A3A1A;
-  display: grid;
-  place-items: center;
-  margin-bottom: 1.35rem;
-  transition: background 0.25s var(--ease), transform 0.25s var(--ease);
-  flex-shrink: 0;
-}
-
-.value-badge svg {
-  width: 26px;
-  height: 26px;
-  stroke: #D4A537;
-  transition: stroke 0.25s var(--ease);
-}
-
-.value-card:hover .value-badge {
-  background: #254B25;
-  transform: scale(1.05);
+@media (prefers-reduced-motion: reduce) {
+  .value-card {
+    animation: none !important;
+  }
 }
 
 .value-card h4 {
