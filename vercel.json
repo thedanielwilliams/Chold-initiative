@@ -1,0 +1,4 @@
+{
+  "buildCommand": "python3 chold-initiative-website/build/build.py",
+  "outputDirectory": "chold-initiative-website/website"
+}

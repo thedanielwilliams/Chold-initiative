@@ -12,7 +12,7 @@ import os
 import re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SITE = os.path.normpath(os.path.join(HERE, '..', 'site'))
+SITE = os.path.normpath(os.path.join(HERE, '..', 'website'))
 PAGES = os.path.join(HERE, 'pages')
 BASE_URL = 'https://choldinitiative.org'
 
