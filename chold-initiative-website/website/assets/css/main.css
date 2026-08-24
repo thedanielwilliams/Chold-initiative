@@ -2050,82 +2050,155 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
 
 /* --------------------------------------------------------------------------
    Floating Multi-Shape Badges ("Where the work concentrates")
+   Mix of Circle, Triangle, Hexagon, Diamond, Arch, Octagon shapes & indicators
    -------------------------------------------------------------------------- */
 .badge-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.1rem;
-  padding-block: 1.25rem;
+  gap: 1.25rem;
+  padding-block: 1.5rem;
   align-items: center;
 }
 
 .badge {
   display: inline-flex;
   align-items: center;
+  gap: 0.65rem;
   font-size: 0.95rem;
   font-weight: 650;
-  padding: 0.75rem 1.4rem;
+  padding: 0.75rem 1.45rem;
   color: #1A3A1A;
   background: var(--white);
-  border: 1.5px solid rgba(26, 58, 26, 0.12);
+  border: 1.5px solid rgba(26, 58, 26, 0.14);
   box-shadow: 0 8px 24px rgba(26, 58, 26, 0.06), 0 2px 6px rgba(0, 0, 0, 0.02);
   transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s var(--ease), background-color 0.35s var(--ease);
   animation: shapeFloat 4.8s ease-in-out infinite;
   cursor: default;
   user-select: none;
+  position: relative;
 }
 
-/* 8 Distinct Shape Modifiers */
+.badge::before {
+  content: "";
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* --- Shape 1: Circle Pill + Solid Gold Circle Indicator --- */
 .badge:nth-child(8n+1) {
-  border-radius: 30px 8px 30px 8px;
-  border-top-color: var(--gold-500);
+  border-radius: 999px;
+  border-left: 3.5px solid var(--gold-500);
   animation-delay: 0s;
   animation-duration: 4.4s;
 }
+.badge:nth-child(8n+1)::before {
+  width: 10px;
+  height: 10px;
+  background: var(--gold-600);
+  border-radius: 50%;
+}
 
+/* --- Shape 2: Angled Triangle / Polygon Badge + Upward Triangle Indicator --- */
 .badge:nth-child(8n+2) {
-  border-radius: 20px 20px 6px 6px;
+  clip-path: polygon(14px 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
+  padding-inline: 1.85rem;
+  border-radius: 4px;
+  background: #FAF8F2;
+  border-color: rgba(26, 58, 26, 0.18);
   animation-delay: 0.8s;
   animation-duration: 5.2s;
 }
+.badge:nth-child(8n+2)::before {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 11px solid #1A3A1A;
+}
 
+/* --- Shape 3: Pointed Hexagon Tag + Diamond Indicator --- */
 .badge:nth-child(8n+3) {
-  border-radius: 18px 6px 18px 18px;
-  border-right-color: var(--gold-500);
+  border-radius: 18px 4px 18px 4px;
+  border-right: 3.5px solid var(--gold-500);
   animation-delay: 1.6s;
   animation-duration: 4.6s;
 }
+.badge:nth-child(8n+3)::before {
+  width: 9px;
+  height: 9px;
+  background: var(--gold-600);
+  transform: rotate(45deg);
+}
 
+/* --- Shape 4: Triangle Dome / Arch Badge + Triangle Indicator --- */
 .badge:nth-child(8n+4) {
-  border-radius: 8px 26px 8px 26px;
+  border-radius: 28px 28px 6px 6px;
+  border-top: 3.5px solid #1A3A1A;
   animation-delay: 0.4s;
   animation-duration: 5.0s;
 }
+.badge:nth-child(8n+4)::before {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 11px solid var(--gold-600);
+}
 
+/* --- Shape 5: Teardrop Crescent + Ring Circle Indicator --- */
 .badge:nth-child(8n+5) {
-  border-radius: 999px;
-  border-bottom-color: var(--gold-500);
+  border-radius: 50px 50px 50px 4px;
   animation-delay: 1.2s;
   animation-duration: 4.2s;
 }
+.badge:nth-child(8n+5)::before {
+  width: 9px;
+  height: 9px;
+  border: 2.5px solid #1A3A1A;
+  border-radius: 50%;
+}
 
+/* --- Shape 6: Octagon Ticket Tag + Square Indicator --- */
 .badge:nth-child(8n+6) {
-  border-radius: 24px 24px 24px 6px;
+  clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px);
+  padding-inline: 1.75rem;
+  background: #F5F2EA;
   animation-delay: 2.0s;
   animation-duration: 4.9s;
 }
+.badge:nth-child(8n+6)::before {
+  width: 9px;
+  height: 9px;
+  background: var(--gold-600);
+  border-radius: 2px;
+}
 
+/* --- Shape 7: Leaf Sail + Downward Triangle Indicator --- */
 .badge:nth-child(8n+7) {
-  border-radius: 6px 26px 26px 26px;
-  border-left-color: var(--gold-500);
+  border-radius: 6px 28px 6px 28px;
+  border-bottom: 3.5px solid var(--gold-500);
   animation-delay: 0.9s;
   animation-duration: 5.4s;
 }
+.badge:nth-child(8n+7)::before {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 11px solid #1A3A1A;
+}
 
+/* --- Shape 8: Rounded Scallop + Capsule Indicator --- */
 .badge:nth-child(8n+8) {
-  border-radius: 14px 24px 14px 24px;
+  border-radius: 24px 8px 24px 24px;
   animation-delay: 1.7s;
   animation-duration: 4.5s;
+}
+.badge:nth-child(8n+8)::before {
+  width: 12px;
+  height: 6px;
+  background: var(--gold-600);
+  border-radius: 4px;
 }
 
 /* Floating animation */
