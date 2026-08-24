@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-CHOLD Initiative: static site builder.
+CHOLD Initiative — static site builder.
 
 Assembles the shared header, footer and <head> around each page's body content
 and writes plain, dependency-free HTML files into ../site/.
@@ -79,7 +79,7 @@ HEAD = """<!DOCTYPE html>
 HEADER = """
 <header class="site-header{overhero}">
   <div class="wrap header-inner">
-    <a class="brand" href="index.html" aria-label="CHOLD Initiative home">
+    <a class="brand" href="index.html" aria-label="CHOLD Initiative — home">
       <img class="logo-dark" src="assets/img/logo-mark.png" alt="" width="42" height="44">
       <img class="logo-light" src="assets/img/logo-mark-white.png" alt="" width="42" height="44">
       <span class="brand-text">
@@ -118,7 +118,7 @@ FOOTER = """
           </div>
         </div>
         <p style="max-width:38ch">
-          Center for Holistic Livestock Development Initiative: expertise in data-driven
+          Center for Holistic Livestock Development Initiative &mdash; expertise in data-driven
           solutions, disease resilience and sustainable development.
         </p>
         <div class="social">
