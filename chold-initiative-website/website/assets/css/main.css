@@ -728,46 +728,36 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
 }
 
 /* --------------------------------------------------------------------------
-   13. Pillars / Stepped Process
+   13. Pillars / Five Core Pillars Layout
    -------------------------------------------------------------------------- */
 .pillars-section {
   position: relative;
   overflow: hidden;
 }
 
-.pillars-stepped-grid {
+.pillars-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: clamp(1.2rem, 0.8rem + 1vw, 2.2rem);
+  gap: clamp(1.2rem, 1vw, 2rem);
   align-items: start;
-  position: relative;
-  margin-bottom: 2rem;
 }
 
-/* Individual Pillar Node */
 .pillar-node {
   position: relative;
-  padding: 0.2rem;
   background: transparent;
   border: none;
+  padding: 0;
 }
 
-/* Stepped vertical rhythm on desktop: odd sit higher, even drop lower */
-@media (min-width: 901px) {
-  .pillar-offset-down {
-    margin-top: 3.5rem;
-  }
-}
-
-/* Large Ghosted Number */
+/* Aligned baseline & non-overlapping ghosted number */
 .pillar-ghost-num {
   font-family: var(--font-display);
-  font-size: clamp(3.8rem, 3.2rem + 2vw, 5.2rem);
+  font-size: clamp(2.5rem, 2rem + 1vw, 3.2rem);
   font-weight: 800;
-  line-height: 0.9;
-  color: var(--green-900);
-  opacity: 0.12;
-  margin-bottom: -0.85rem;
+  line-height: 1;
+  color: var(--green-700);
+  opacity: 0.22;
+  margin-bottom: 0.25rem;
   letter-spacing: -0.04em;
   user-select: none;
   pointer-events: none;
@@ -780,70 +770,38 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
 
 .pillar-content h4 {
   font-family: var(--font-display);
-  font-size: clamp(1.1rem, 1rem + 0.35vw, 1.25rem);
+  font-size: clamp(1.05rem, 0.95rem + 0.3vw, 1.2rem);
   font-weight: 700;
   color: var(--ink);
-  margin-bottom: 0.55rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.25;
 }
 
 .pillar-content p {
   font-size: var(--fs-xs);
   line-height: 1.55;
   color: var(--ink-soft);
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.75rem;
 }
 
-/* Sub-capabilities supporting list under description */
-.pillar-caps-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  border-top: 1px dashed rgba(0, 0, 0, 0.14);
-  padding-top: 0.75rem;
+/* Quiet single-line muted meta text for folded-in capabilities */
+.pillar-caps-meta {
+  font-size: 0.76rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  opacity: 0.75;
 }
 
-.pillar-caps-list li {
-  font-size: 0.78rem;
-  line-height: 1.4;
-}
-
-.pillar-caps-list a {
-  color: var(--green-700);
-  font-weight: 600;
-  text-decoration: none;
-  transition: color 0.22s var(--ease);
-  position: relative;
-  padding-left: 0.85rem;
-}
-
-.pillar-caps-list a::before {
-  content: "•";
-  position: absolute;
-  left: 0;
-  color: var(--gold-600);
-}
-
-.pillar-caps-list a:hover {
-  color: var(--gold-600);
-}
-
-/* Responsive (Mobile Stack) */
+/* Mobile Responsive */
 @media (max-width: 900px) {
-  .pillars-stepped-grid {
+  .pillars-grid {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-
-  .pillar-offset-down {
-    margin-top: 0;
+    gap: 2.2rem;
   }
 
   .pillar-ghost-num {
-    font-size: 4rem;
-    margin-bottom: -0.75rem;
+    font-size: 3rem;
+    margin-bottom: 0.2rem;
   }
 }
 
