@@ -731,34 +731,66 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
 /* --------------------------------------------------------------------------
    13. Pillars / Five Core Pillars Layout
    -------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------
+   13. Pillars / Five Core Pillars Bento Box Layout
+   -------------------------------------------------------------------------- */
 .pillars-section {
   position: relative;
   overflow: hidden;
+  background-color: var(--sand-2);
 }
 
 .pillars-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: clamp(1.2rem, 1vw, 2rem);
-  align-items: start;
+  grid-template-columns: repeat(12, 1fr);
+  gap: clamp(1.25rem, 1rem + 0.8vw, 1.75rem);
+  align-items: stretch;
 }
 
+/* Individual Bento Tile Container */
 .pillar-node {
   position: relative;
-  background: transparent;
-  border: none;
-  padding: 0;
+  background: var(--white);
+  border: 1px solid rgba(13, 58, 21, 0.08);
+  border-radius: 16px;
+  padding: clamp(1.5rem, 1.2rem + 1vw, 2.25rem);
+  box-shadow: 0 4px 20px rgba(8, 36, 14, 0.03);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease), border-color 0.28s var(--ease);
 }
 
-/* Aligned baseline & non-overlapping ghosted number */
+.pillar-node:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(8, 36, 14, 0.07);
+  border-color: rgba(13, 58, 21, 0.16);
+}
+
+/* Bento Grid Spans */
+.pillar-span-large {
+  grid-column: span 5;
+  grid-row: span 2;
+}
+
+.pillar-span-mid {
+  grid-column: span 4;
+}
+
+.pillar-span-small {
+  grid-column: span 3;
+}
+
+/* Card Content Structure */
 .pillar-ghost-num {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 2rem + 1vw, 3.2rem);
+  font-size: clamp(2.2rem, 1.8rem + 1vw, 3rem);
   font-weight: 800;
   line-height: 1;
-  color: var(--green-700);
-  opacity: 0.22;
-  margin-bottom: 0.25rem;
+  color: var(--green-600);
+  opacity: 0.42;
+  margin-bottom: 1rem;
   letter-spacing: -0.04em;
   user-select: none;
   pointer-events: none;
@@ -767,42 +799,69 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
 .pillar-content {
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .pillar-content h4 {
   font-family: var(--font-display);
-  font-size: clamp(1.05rem, 0.95rem + 0.3vw, 1.2rem);
-  font-weight: 700;
+  font-size: clamp(1.15rem, 1.05rem + 0.35vw, 1.35rem);
+  font-weight: 800;
   color: var(--ink);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   line-height: 1.25;
 }
 
 .pillar-content p {
-  font-size: var(--fs-xs);
-  line-height: 1.55;
+  font-size: 0.9375rem;
+  line-height: 1.6;
   color: var(--ink-soft);
-  margin-bottom: 0.75rem;
+  margin-bottom: 1.5rem;
 }
 
-/* Quiet single-line muted meta text for folded-in capabilities */
+/* Lighter "Includes:" Line Anchored to Base */
 .pillar-caps-meta {
-  font-size: 0.76rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line-soft);
+  font-size: 0.8125rem;
   line-height: 1.45;
-  color: var(--ink-soft);
-  opacity: 0.75;
+  color: var(--muted);
 }
 
-/* Mobile Responsive */
-@media (max-width: 900px) {
+.pillar-caps-meta strong {
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+/* Responsive Grid Adaptation */
+@media (max-width: 992px) {
+  .pillars-grid {
+    grid-template-columns: repeat(12, 1fr);
+  }
+  .pillar-span-large {
+    grid-column: span 12;
+    grid-row: auto;
+  }
+  .pillar-span-mid {
+    grid-column: span 6;
+  }
+  .pillar-span-small {
+    grid-column: span 6;
+  }
+}
+
+@media (max-width: 640px) {
   .pillars-grid {
     grid-template-columns: 1fr;
-    gap: 2.2rem;
+    gap: 1.25rem;
   }
-
-  .pillar-ghost-num {
-    font-size: 3rem;
-    margin-bottom: 0.2rem;
+  .pillar-span-large,
+  .pillar-span-mid,
+  .pillar-span-small {
+    grid-column: span 1;
+    grid-row: auto;
   }
 }
 
