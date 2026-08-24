@@ -782,6 +782,122 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
 .person-role { font-size: 0.825rem; color: var(--gold-600); font-weight: 700; letter-spacing: 0.01em; }
 .person-org { font-size: 0.8125rem; color: var(--muted); margin-top: 0.4rem; line-height: 1.45; }
 
+/* --------------------------------------------------------------------------
+   Core Values Section Redesign
+   -------------------------------------------------------------------------- */
+.values-section {
+  background: #F7F4EC;
+  padding-block: clamp(4.5rem, 3.5rem + 4vw, 7rem);
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+@media (max-width: 900px) {
+  .values-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .values-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.value-card {
+  position: relative;
+  background: #FFFFFF;
+  border-radius: 20px;
+  padding: 2.25rem 2rem;
+  border: none;
+  box-shadow: 0 2px 4px rgba(26, 58, 26, 0.04), 0 12px 32px rgba(26, 58, 26, 0.08);
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.value-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: #D4A537;
+  transition: background 0.25s var(--ease);
+}
+
+.value-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 4px 8px rgba(26, 58, 26, 0.06), 0 20px 40px rgba(26, 58, 26, 0.12);
+}
+
+.value-card:hover::before {
+  background: #1A3A1A;
+}
+
+.value-badge {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #1A3A1A;
+  display: grid;
+  place-items: center;
+  margin-bottom: 1.35rem;
+  transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+  flex-shrink: 0;
+}
+
+.value-badge svg {
+  width: 26px;
+  height: 26px;
+  stroke: #D4A537;
+  transition: stroke 0.25s var(--ease);
+}
+
+.value-card:hover .value-badge {
+  background: #254B25;
+  transform: scale(1.05);
+}
+
+.value-card h4 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #1A2E1A;
+  margin-bottom: 0.75rem;
+  position: relative;
+  display: inline-block;
+}
+
+.value-card h4::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #D4A537;
+  margin-top: 6px;
+  transition: width 0.25s var(--ease);
+}
+
+.value-card:hover h4::after {
+  width: 100%;
+}
+
+.value-card p {
+  color: #4A584E;
+  font-size: 0.935rem;
+  line-height: 1.65;
+  margin: 0;
+}
+
 /* Featured bio */
 .bio {
   display: grid; grid-template-columns: 300px 1fr;
