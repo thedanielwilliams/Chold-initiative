@@ -1141,6 +1141,216 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
 }
 
 /* --------------------------------------------------------------------------
+   Timeline Spine Layout (Value Chain Capabilities)
+   -------------------------------------------------------------------------- */
+.capabilities-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.timeline-wrapper {
+  position: relative;
+  max-width: 1000px;
+  margin-inline: auto;
+  padding-block: 1rem;
+}
+
+/* Central vertical spine line */
+.timeline-spine {
+  position: absolute;
+  top: 1.5rem;
+  bottom: 1.5rem;
+  left: 50%;
+  width: 2px;
+  background: var(--green-700);
+  transform: translateX(-50%) scaleY(0);
+  transform-origin: top center;
+  transition: transform 1.2s cubic-bezier(0.22, 0.68, 0.34, 1);
+  z-index: 1;
+}
+
+.timeline-wrapper.is-in .timeline-spine,
+.timeline-spine.is-in {
+  transform: translateX(-50%) scaleY(1);
+}
+
+/* Nodes container */
+.timeline-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  position: relative;
+}
+
+.timeline-node {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+}
+
+/* Marker Dot on Spine */
+.timeline-dot {
+  position: absolute;
+  top: 0.6rem;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--green-900);
+  border: 3px solid var(--cream);
+  outline: 2px solid var(--green-700);
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.4s var(--ease);
+  z-index: 2;
+}
+
+.is-in .timeline-dot,
+.timeline-node.is-in .timeline-dot {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Content Links (No card boxes/borders) */
+.timeline-content {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s var(--ease);
+}
+
+.timeline-content:hover {
+  transform: translateY(-2px);
+}
+
+.timeline-node-left .timeline-content {
+  grid-column: 1;
+  text-align: right;
+  padding-right: 3.2rem;
+}
+
+.timeline-node-right .timeline-content {
+  grid-column: 2;
+  text-align: left;
+  padding-left: 3.2rem;
+}
+
+/* Ghosted/Prominent Numbering */
+.timeline-num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 1.8rem + 1vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--green-700);
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.03em;
+  opacity: 0.9;
+  transition: color 0.3s var(--ease);
+}
+
+.timeline-content:hover .timeline-num {
+  color: var(--gold-600);
+}
+
+/* Title & Description */
+.timeline-content h4 {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 1.05rem + 0.4vw, 1.35rem);
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+  transition: color 0.25s var(--ease);
+}
+
+.timeline-content:hover h4 {
+  color: var(--green-900);
+}
+
+.timeline-content p {
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 0;
+  max-width: 42ch;
+}
+
+.timeline-node-left .timeline-content p {
+  margin-left: auto;
+}
+
+/* Slide Reveals for Odd vs Even Nodes */
+.reveal-slide-right {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+
+.reveal-slide-left {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+
+.reveal-slide-right.is-in,
+.reveal-slide-left.is-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Mobile Responsive */
+@media (max-width: 900px) {
+  .timeline-wrapper {
+    padding-left: 1.5rem;
+  }
+
+  .timeline-spine {
+    left: 20px;
+    transform: scaleY(0);
+  }
+
+  .timeline-wrapper.is-in .timeline-spine,
+  .timeline-spine.is-in {
+    transform: scaleY(1);
+  }
+
+  .timeline-list {
+    gap: 2.5rem;
+  }
+
+  .timeline-node {
+    display: block;
+    padding-left: 2.2rem;
+  }
+
+  .timeline-dot {
+    left: 20px;
+    top: 1.2rem;
+  }
+
+  .timeline-node-left .timeline-content,
+  .timeline-node-right .timeline-content {
+    grid-column: auto;
+    text-align: left;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .timeline-node-left .timeline-content p {
+    margin-left: 0;
+  }
+
+  .reveal-slide-right,
+  .reveal-slide-left {
+    transform: translateY(22px);
+  }
+
+  .reveal-slide-right.is-in,
+  .reveal-slide-left.is-in {
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------------------------------
    20. Motion
    -------------------------------------------------------------------------- */
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
