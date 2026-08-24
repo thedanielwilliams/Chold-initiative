@@ -692,21 +692,56 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
 }
 
 /* --------------------------------------------------------------------------
-   12. People
+   12. People / Trustee Cards
    -------------------------------------------------------------------------- */
 .person {
-  background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg);
-  overflow: hidden; height: 100%;
-  transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+  background: var(--white);
+  border: 1px solid rgba(13, 58, 21, 0.08);
+  border-radius: 18px;
+  padding: 0.85rem;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 20px rgba(8, 36, 14, 0.03);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
 }
-.person:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-.person-photo { aspect-ratio: 4/5; overflow: hidden; background: var(--sand-2); }
-.person-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; transition: transform .6s var(--ease); }
-.person:hover .person-photo img { transform: scale(1.05); }
-.person-body { padding: 1.15rem 1.15rem 1.35rem; }
-.person-body h4 { margin-bottom: .2rem; font-size: 1.02rem; }
-.person-role { font-size: .8rem; color: var(--gold-600); font-weight: 650; letter-spacing: .02em; }
-.person-org { font-size: var(--fs-xs); color: var(--muted); margin-top: .35rem; }
+.person:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(8, 36, 14, 0.08);
+  border-color: rgba(13, 58, 21, 0.16);
+}
+.person-photo {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--sand-2);
+  position: relative;
+}
+.person-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.6s var(--ease);
+}
+.person:hover .person-photo img { transform: scale(1.04); }
+.person-body {
+  padding: 1.1rem 0.4rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.person-body h4 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 0.35rem;
+  line-height: 1.3;
+}
+.person-role { font-size: 0.825rem; color: var(--gold-600); font-weight: 700; letter-spacing: 0.01em; }
+.person-org { font-size: 0.8125rem; color: var(--muted); margin-top: 0.4rem; line-height: 1.45; }
 
 /* Featured bio */
 .bio {
