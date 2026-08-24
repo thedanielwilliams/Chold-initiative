@@ -156,7 +156,6 @@ FOOTER = """
           <li>Abuja, Federal Capital Territory<br>Nigeria</li>
           <li><a href="mailto:info@choldinitiative.org">info@choldinitiative.org</a></li>
           <li><a href="tel:+2348171111551">+234 (081) 7111 1551</a></li>
-          <li style="margin-top:1.1rem"><a class="btn btn-gold btn-sm" href="contact.html">Partner with us</a></li>
         </ul>
       </div>
     </div>
