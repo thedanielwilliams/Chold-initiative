@@ -783,17 +783,80 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
 .person-org { font-size: 0.8125rem; color: var(--muted); margin-top: 0.4rem; line-height: 1.45; }
 
 /* --------------------------------------------------------------------------
-   Core Values Section — Bento Box Grid Redesign
+   Core Values Section — Subtle Nautical / Sail Theme
    -------------------------------------------------------------------------- */
 .values-section {
+  position: relative;
   background: #F7F4EC;
-  padding-block: clamp(4.5rem, 3.5rem + 4vw, 7rem);
+  padding-block: clamp(5rem, 4rem + 4vw, 7.5rem);
+  overflow: hidden;
+}
+
+.values-section-head {
+  position: relative;
+  z-index: 2;
+}
+
+/* Compass Rose Watermark behind H1 */
+.compass-watermark {
+  position: absolute;
+  top: -40px;
+  right: -30px;
+  width: 220px;
+  height: 220px;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: -1;
+  color: #D4A537;
+}
+
+/* Faint Horizon Line */
+.values-horizon {
+  position: absolute;
+  top: 48%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(212, 165, 55, 0.2) 20%, rgba(26, 58, 26, 0.1) 50%, rgba(212, 165, 55, 0.2) 80%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Rigging Lines Overlay */
+.rigging-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Wave Contour SVG at Bottom Edge */
+.values-wave-contour {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 90px;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.values-wave-contour svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .values-bento-grid {
+  position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.5rem;
+  gap: 1.75rem;
 }
 
 .value-card-wide {
@@ -807,12 +870,16 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
 @media (max-width: 900px) {
   .values-bento-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
   }
   .value-card-wide {
     grid-column: span 2;
   }
   .value-card-standard {
     grid-column: span 1;
+  }
+  .rigging-overlay {
+    display: none;
   }
 }
 
@@ -827,14 +894,15 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
   }
 }
 
+/* Sail Metaphor Card */
 .value-card {
   position: relative;
   background: #FFFFFF;
-  border-radius: 20px;
+  border-radius: 36px 10px 20px 20px;
   padding: 2.25rem 2rem;
-  border: none;
-  box-shadow: 0 2px 4px rgba(26, 58, 26, 0.04), 0 12px 32px rgba(26, 58, 26, 0.08);
-  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  border: 1px solid rgba(26, 58, 26, 0.06);
+  box-shadow: 0 3px 8px rgba(26, 58, 26, 0.04), 0 14px 36px rgba(26, 58, 26, 0.07);
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), border-color 0.25s var(--ease);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -849,40 +917,46 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
   right: 0;
   height: 4px;
   background: #D4A537;
+  border-top-left-radius: 36px;
+  border-top-right-radius: 10px;
   transition: background 0.25s var(--ease);
 }
 
 .value-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 4px 8px rgba(26, 58, 26, 0.06), 0 20px 40px rgba(26, 58, 26, 0.12);
+  transform: translateY(-6px) rotate(-0.4deg);
+  box-shadow: 0 6px 14px rgba(26, 58, 26, 0.06), 0 22px 48px rgba(26, 58, 26, 0.12);
+  border-color: rgba(26, 58, 26, 0.14);
 }
 
 .value-card:hover::before {
   background: #1A3A1A;
 }
 
-.value-badge {
-  width: 60px;
-  height: 60px;
+/* Ship Porthole Badge */
+.porthole-badge {
+  width: 58px;
+  height: 58px;
   border-radius: 50%;
   background: #1A3A1A;
+  box-shadow: 0 0 0 2.5px #D4A537, 0 3px 10px rgba(26, 58, 26, 0.18);
   display: grid;
   place-items: center;
   margin-bottom: 1.35rem;
-  transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+  transition: background 0.25s var(--ease), transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
   flex-shrink: 0;
 }
 
-.value-badge svg {
+.porthole-badge svg {
   width: 26px;
   height: 26px;
-  stroke: #D4A537;
+  stroke: #F7F4EC;
   transition: stroke 0.25s var(--ease);
 }
 
-.value-card:hover .value-badge {
+.value-card:hover .porthole-badge {
   background: #254B25;
-  transform: scale(1.05);
+  transform: scale(1.06);
+  box-shadow: 0 0 0 3px #D4A537, 0 4px 14px rgba(26, 58, 26, 0.25);
 }
 
 .value-card h4 {
@@ -915,6 +989,7 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
   line-height: 1.65;
   margin: 0;
 }
+
 
 /* Featured bio */
 .bio {
