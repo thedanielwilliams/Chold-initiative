@@ -783,29 +783,47 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
 .person-org { font-size: 0.8125rem; color: var(--muted); margin-top: 0.4rem; line-height: 1.45; }
 
 /* --------------------------------------------------------------------------
-   Core Values Section Redesign
+   Core Values Section — Bento Box Grid Redesign
    -------------------------------------------------------------------------- */
 .values-section {
   background: #F7F4EC;
   padding-block: clamp(4.5rem, 3.5rem + 4vw, 7rem);
 }
 
-.values-grid {
+.values-bento-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 2rem;
+  gap: 1.5rem;
+}
+
+.value-card-wide {
+  grid-column: span 2;
+}
+
+.value-card-standard {
+  grid-column: span 1;
 }
 
 @media (max-width: 900px) {
-  .values-grid {
+  .values-bento-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .value-card-wide {
+    grid-column: span 2;
+  }
+  .value-card-standard {
+    grid-column: span 1;
   }
 }
 
 @media (max-width: 600px) {
-  .values-grid {
+  .values-bento-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1.25rem;
+  }
+  .value-card-wide,
+  .value-card-standard {
+    grid-column: span 1;
   }
 }
 
