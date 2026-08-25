@@ -17,10 +17,11 @@ PAGES = os.path.join(HERE, 'pages')
 BASE_URL = 'https://choldinitiative.org'
 
 NAV = [
+    ('index.html', 'Home'),
     ('about.html', 'About'),
     ('what-we-do.html', 'What We Do'),
     ('impact.html', 'Impact'),
-    ('news.html', 'News &amp; Insights'),
+    ('news.html', 'Insights'),
     ('careers.html', 'Careers'),
 ]
 
