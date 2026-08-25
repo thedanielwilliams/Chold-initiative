@@ -1269,10 +1269,10 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
    15. Accordion (careers / FAQ)
    -------------------------------------------------------------------------- */
 .acc-wrap { max-width: 720px; }
-.acc { border: 1px solid #e3e1da; border-radius: 12px; overflow: hidden; background: #ffffff; transition: box-shadow 200ms ease, border-left-color 200ms ease, border-left-width 200ms ease; }
+.acc { border: 1px solid #e3e1da; border-radius: 12px !important; overflow: hidden; background: #ffffff; transition: box-shadow 200ms ease, border-left-color 200ms ease, border-left-width 200ms ease; }
 .acc + .acc { margin-top: 12px; }
 .acc:hover { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); }
-.acc.is-open, .acc:has(.acc-head[aria-expanded="true"]) { border-left: 3px solid #1e3a23; }
+.acc.is-open, .acc:has([aria-expanded="true"]) { border-left: 3px solid #1e3a23 !important; }
 .acc-head {
   width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1.2rem;
   background: transparent; border: 0; cursor: pointer; text-align: left;
@@ -1300,8 +1300,9 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
 .acc-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 200ms ease; }
 .acc-panel.is-open { grid-template-rows: 1fr; }
 .acc-panel > div { overflow: hidden; }
-.acc-inner { padding: 0 28px 24px; }
+.acc-inner { padding: 0 28px 28px 28px; }
 .acc-inner p, .acc-inner li { font-size: 16px; line-height: 1.6; }
+.acc-inner ul { padding-left: 1.25rem; margin: 0.5rem 0 1rem; }
 .acc-inner h5 { font-family: var(--font-display); font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.08em; color: #1e3a23; margin: 1.2rem 0 0.5rem; }
 
 /* --------------------------------------------------------------------------
