@@ -173,9 +173,12 @@
       
       <div id="newsletter-form-container" class="newsletter-form-container">
         <form id="newsletter-form" class="newsletter-form" novalidate>
-          <div class="newsletter-form-row">
+          <div class="newsletter-form-row" id="newsletter-form-row">
             <input type="email" id="newsletter-email" name="email" class="newsletter-field" placeholder="you@organisation.org" aria-label="Email address" required>
-            <button type="submit" id="newsletter-submit" class="newsletter-submit-btn">Join the list</button>
+            <button type="submit" id="newsletter-submit" class="newsletter-submit-btn">
+              Join the list
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
           </div>
           <div id="newsletter-helper-slot" class="newsletter-helper-slot" aria-live="polite">No spam. Unsubscribe any time.</div>
         </form>
@@ -191,6 +194,7 @@
       const submitBtn = document.getElementById('newsletter-submit');
       const helperEl = document.getElementById('newsletter-helper-slot');
       const container = document.getElementById('newsletter-form-container');
+      const formRow = document.getElementById('newsletter-form-row');
 
       const defaultHelperText = "No spam. Unsubscribe any time.";
 
@@ -198,11 +202,16 @@
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
       }
 
+      function clearErrors() {
+        helperEl.classList.remove('is-error');
+        helperEl.textContent = defaultHelperText;
+        input.classList.remove('has-error');
+        if (formRow) formRow.classList.remove('has-error');
+      }
+
       input.addEventListener('input', function() {
         if (helperEl.classList.contains('is-error')) {
-          helperEl.classList.remove('is-error');
-          helperEl.textContent = defaultHelperText;
-          input.classList.remove('has-error');
+          clearErrors();
         }
       });
 
@@ -214,16 +223,15 @@
           helperEl.textContent = "Enter a valid email address";
           helperEl.classList.add('is-error');
           input.classList.add('has-error');
+          if (formRow) formRow.classList.add('has-error');
           input.focus();
           return;
         }
 
-        helperEl.classList.remove('is-error');
-        helperEl.textContent = defaultHelperText;
-        input.classList.remove('has-error');
+        clearErrors();
 
         submitBtn.disabled = true;
-        submitBtn.textContent = 'Joining...';
+        submitBtn.innerHTML = 'Joining...';
 
         setTimeout(function() {
           container.style.opacity = '0';
