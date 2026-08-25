@@ -173,11 +173,11 @@
       
       <div id="newsletter-form-container" class="newsletter-form-container">
         <form id="newsletter-form" class="newsletter-form" novalidate>
-          <div class="newsletter-form-row" id="newsletter-form-row">
+          <div class="newsletter-form-row">
             <input type="email" id="newsletter-email" name="email" class="newsletter-field" placeholder="you@organisation.org" aria-label="Email address" required>
             <button type="submit" id="newsletter-submit" class="newsletter-submit-btn">
               Join the list
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </button>
           </div>
           <div id="newsletter-helper-slot" class="newsletter-helper-slot" aria-live="polite">No spam. Unsubscribe any time.</div>
@@ -194,7 +194,6 @@
       const submitBtn = document.getElementById('newsletter-submit');
       const helperEl = document.getElementById('newsletter-helper-slot');
       const container = document.getElementById('newsletter-form-container');
-      const formRow = document.getElementById('newsletter-form-row');
 
       const defaultHelperText = "No spam. Unsubscribe any time.";
 
@@ -206,8 +205,10 @@
         helperEl.classList.remove('is-error');
         helperEl.textContent = defaultHelperText;
         input.classList.remove('has-error');
-        if (formRow) formRow.classList.remove('has-error');
       }
+
+      // Reset to clean default state on mount (defensive: ensure no error shows initially)
+      clearErrors();
 
       input.addEventListener('input', function() {
         if (helperEl.classList.contains('is-error')) {
@@ -223,7 +224,6 @@
           helperEl.textContent = "Enter a valid email address";
           helperEl.classList.add('is-error');
           input.classList.add('has-error');
-          if (formRow) formRow.classList.add('has-error');
           input.focus();
           return;
         }
@@ -231,16 +231,16 @@
         clearErrors();
 
         submitBtn.disabled = true;
-        submitBtn.innerHTML = 'Joining...';
+        submitBtn.textContent = 'Joining...';
 
         setTimeout(function() {
           container.style.opacity = '0';
 
           setTimeout(function() {
             container.innerHTML = `
-              <div class="newsletter-success-block" style="padding-block: 0.5rem;">
+              <div class="newsletter-success-block">
                 <div aria-hidden="true" style="width: 44px; height: 44px; border-radius: 50%; background: var(--green-100); color: var(--green-700); display: inline-grid; place-items: center; margin: 0 auto 10px;">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px;"><polyline points="20 6 9 17 4 12"/></svg>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
                 <h4 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; margin-bottom: 0.3rem; color: var(--ink);">You're on the list</h4>
                 <p style="font-family: var(--font-body); font-size: 0.95rem; color: var(--ink-soft); margin: 0;">We'll send the next report to <strong>${escapeHtml(emailVal)}</strong>.</p>
