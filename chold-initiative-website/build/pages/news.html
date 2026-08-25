@@ -92,21 +92,21 @@ ogimage: council-leaders.jpg
       </article>
     </div>
 
-    <div class="card card-flat newsletter-card mt-4 reveal" style="text-align:center;max-width:640px;margin-inline:auto;padding:clamp(2rem, 1.5rem + 2vw, 3rem);">
-      <h4>Field notes, delivered</h4>
-      <p style="margin-bottom:1.25rem;">Field reports, technical briefs and policy commentary as programmes progress. No spam, unsubscribe any time.</p>
+    <div class="card card-flat newsletter-card mt-4 reveal">
+      <h4>Get the field reports first</h4>
+      <p class="newsletter-body">Briefs and policy notes from CHOLD programmes, sent when there's something worth reading.</p>
       
-      <div id="newsletter-form-container">
-        <form id="newsletter-form" class="newsletter-form" novalidate>
-          <div class="newsletter-input-group">
-            <input type="email" id="newsletter-email" name="email" class="newsletter-input" placeholder="you@organisation.org" aria-label="Email address" required>
-            <button type="submit" id="newsletter-submit" class="btn newsletter-btn">Subscribe</button>
+      <div id="newsletter-form-container" class="newsletter-form-container">
+        <form id="newsletter-form" novalidate>
+          <div class="newsletter-form-row">
+            <input type="email" id="newsletter-email" name="email" class="newsletter-field" placeholder="Your email" aria-label="Your email" required>
+            <button type="submit" id="newsletter-submit" class="newsletter-submit-btn">Join the list</button>
           </div>
-          <div id="newsletter-error" class="newsletter-error" role="alert" aria-live="polite">Enter a valid email address</div>
+          <div id="newsletter-sub-slot" class="newsletter-sub-slot" aria-live="polite">No spam. Unsubscribe any time.</div>
         </form>
       </div>
 
-      <p class="newsletter-muted-footer">Or email <a href="mailto:info@choldinitiative.org">info@choldinitiative.org</a> and we'll add you.</p>
+      <p class="newsletter-bottom-text">Prefer email? Write to <a href="mailto:info@choldinitiative.org">info@choldinitiative.org</a></p>
     </div>
 
     <script>
@@ -116,16 +116,19 @@ ogimage: council-leaders.jpg
 
       const input = document.getElementById('newsletter-email');
       const submitBtn = document.getElementById('newsletter-submit');
-      const errorEl = document.getElementById('newsletter-error');
+      const slotEl = document.getElementById('newsletter-sub-slot');
       const container = document.getElementById('newsletter-form-container');
+
+      const defaultSubText = "No spam. Unsubscribe any time.";
 
       function validateEmail(email) {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
       }
 
       input.addEventListener('input', function() {
-        if (errorEl.style.display === 'block') {
-          errorEl.style.display = 'none';
+        if (slotEl.classList.contains('is-error')) {
+          slotEl.classList.remove('is-error');
+          slotEl.textContent = defaultSubText;
           input.classList.remove('has-error');
         }
       });
@@ -135,35 +138,35 @@ ogimage: council-leaders.jpg
         const emailVal = input.value.trim();
 
         if (!validateEmail(emailVal)) {
-          errorEl.textContent = "Enter a valid email address";
-          errorEl.style.display = 'block';
+          slotEl.textContent = "Enter a valid email address";
+          slotEl.classList.add('is-error');
           input.classList.add('has-error');
           input.focus();
           return;
         }
 
-        errorEl.style.display = 'none';
+        slotEl.classList.remove('is-error');
+        slotEl.textContent = defaultSubText;
         input.classList.remove('has-error');
 
         submitBtn.disabled = true;
-        submitBtn.textContent = 'Adding you...';
+        submitBtn.textContent = 'Joining...';
 
         setTimeout(function() {
-          container.style.transition = 'opacity 180ms ease';
           container.style.opacity = '0';
 
           setTimeout(function() {
             container.innerHTML = `
-              <div class="newsletter-success" style="padding-block: 0.5rem;">
-                <div class="newsletter-success-icon" aria-hidden="true" style="width: 44px; height: 44px; border-radius: 50%; background: rgba(19, 80, 27, 0.1); color: var(--green-700); display: inline-grid; place-items: center; margin: 0 auto 0.75rem;">
+              <div class="newsletter-success-block" style="padding-block: 8px;">
+                <div aria-hidden="true" style="width: 44px; height: 44px; border-radius: 50%; background: rgba(46, 107, 46, 0.12); color: #2e6b2e; display: inline-grid; place-items: center; margin: 0 auto 12px;">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px;"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
-                <h4 style="margin-bottom: 0.4rem; color: #1A2E1A;">You're on the list</h4>
-                <p style="font-size: 0.95rem; color: #4A584E; margin: 0;">Thanks. The next issue will land in your inbox at <strong>${escapeHtml(emailVal)}</strong>.</p>
+                <h4 style="font-size: 24px; margin-bottom: 6px; color: #1A2E1A;">You're on the list</h4>
+                <p style="font-size: 15px; color: #667085; margin: 0;">We'll send the next report to <strong>${escapeHtml(emailVal)}</strong>.</p>
               </div>
             `;
             container.style.opacity = '1';
-          }, 180);
+          }, 200);
 
         }, 800);
       });
