@@ -92,15 +92,23 @@ ogimage: council-leaders.jpg
       </article>
     </div>
 
-    <div class="card card-flat newsletter-card mt-4 reveal">
+    <div class="card newsletter-card mt-4 reveal">
       <h4>Get the field reports first</h4>
       <p class="newsletter-body">Briefs and policy notes from CHOLD programmes, sent when there's something worth reading.</p>
       
       <div id="newsletter-form-container" class="newsletter-form-container">
         <form id="newsletter-form" novalidate>
-          <div class="newsletter-form-row">
-            <input type="email" id="newsletter-email" name="email" class="newsletter-field" placeholder="Your email" aria-label="Your email" required>
-            <button type="submit" id="newsletter-submit" class="newsletter-submit-btn">Join the list</button>
+          <div class="newsletter-form-stack">
+            <div class="newsletter-input-wrap">
+              <span class="newsletter-input-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </span>
+              <input type="email" id="newsletter-email" name="email" class="newsletter-field" placeholder="Ex. yourname@mycompany.com" aria-label="Your email" required>
+            </div>
+            <button type="submit" id="newsletter-submit" class="newsletter-submit-btn">
+              <span>Join the list</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
           </div>
           <div id="newsletter-sub-slot" class="newsletter-sub-slot" aria-live="polite">No spam. Unsubscribe any time.</div>
         </form>
@@ -150,19 +158,19 @@ ogimage: council-leaders.jpg
         input.classList.remove('has-error');
 
         submitBtn.disabled = true;
-        submitBtn.textContent = 'Joining...';
+        submitBtn.innerHTML = '<span>Joining...</span>';
 
         setTimeout(function() {
           container.style.opacity = '0';
 
           setTimeout(function() {
             container.innerHTML = `
-              <div class="newsletter-success-block" style="padding-block: 8px;">
-                <div aria-hidden="true" style="width: 44px; height: 44px; border-radius: 50%; background: rgba(46, 107, 46, 0.12); color: #2e6b2e; display: inline-grid; place-items: center; margin: 0 auto 12px;">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px;"><polyline points="20 6 9 17 4 12"/></svg>
+              <div class="newsletter-success-block" style="padding-block: 1rem;">
+                <div aria-hidden="true" style="width: 48px; height: 48px; border-radius: 50%; background: var(--green-100); color: var(--green-700); display: inline-grid; place-items: center; margin: 0 auto 14px;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px;"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
-                <h4 style="font-size: 24px; margin-bottom: 6px; color: #1A2E1A;">You're on the list</h4>
-                <p style="font-size: 15px; color: #667085; margin: 0;">We'll send the next report to <strong>${escapeHtml(emailVal)}</strong>.</p>
+                <h4 style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--ink);">You're on the list</h4>
+                <p style="font-family: var(--font-body); font-size: 1rem; color: var(--ink-soft); margin: 0;">We'll send the next report to <strong>${escapeHtml(emailVal)}</strong>.</p>
               </div>
             `;
             container.style.opacity = '1';
