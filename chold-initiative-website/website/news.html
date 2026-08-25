@@ -167,10 +167,89 @@
       </article>
     </div>
 
-    <div class="card card-flat mt-4 reveal" style="text-align:center;max-width:640px;margin-inline:auto">
-      <h4>More coming</h4>
-      <p>We publish field reports, technical briefs and policy commentary as programmes progress. Subscribe by writing to <a href="mailto:info@choldinitiative.org">info@choldinitiative.org</a> and we will add you to the distribution list.</p>
+    <div class="card card-flat newsletter-card mt-4 reveal" style="text-align:center;max-width:640px;margin-inline:auto;padding:clamp(2rem, 1.5rem + 2vw, 3rem);">
+      <h4>Field notes, delivered</h4>
+      <p style="margin-bottom:1.25rem;">Field reports, technical briefs and policy commentary as programmes progress. No spam, unsubscribe any time.</p>
+      
+      <div id="newsletter-form-container">
+        <form id="newsletter-form" class="newsletter-form" novalidate>
+          <div class="newsletter-input-group">
+            <input type="email" id="newsletter-email" name="email" class="newsletter-input" placeholder="you@organisation.org" aria-label="Email address" required>
+            <button type="submit" id="newsletter-submit" class="btn newsletter-btn">Subscribe</button>
+          </div>
+          <div id="newsletter-error" class="newsletter-error" role="alert" aria-live="polite">Enter a valid email address</div>
+        </form>
+      </div>
+
+      <p class="newsletter-muted-footer">Or email <a href="mailto:info@choldinitiative.org">info@choldinitiative.org</a> and we'll add you.</p>
     </div>
+
+    <script>
+    (function() {
+      const form = document.getElementById('newsletter-form');
+      if (!form) return;
+
+      const input = document.getElementById('newsletter-email');
+      const submitBtn = document.getElementById('newsletter-submit');
+      const errorEl = document.getElementById('newsletter-error');
+      const container = document.getElementById('newsletter-form-container');
+
+      function validateEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+      }
+
+      input.addEventListener('input', function() {
+        if (errorEl.style.display === 'block') {
+          errorEl.style.display = 'none';
+          input.classList.remove('has-error');
+        }
+      });
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const emailVal = input.value.trim();
+
+        if (!validateEmail(emailVal)) {
+          errorEl.textContent = "Enter a valid email address";
+          errorEl.style.display = 'block';
+          input.classList.add('has-error');
+          input.focus();
+          return;
+        }
+
+        errorEl.style.display = 'none';
+        input.classList.remove('has-error');
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Adding you...';
+
+        setTimeout(function() {
+          container.style.transition = 'opacity 180ms ease';
+          container.style.opacity = '0';
+
+          setTimeout(function() {
+            container.innerHTML = `
+              <div class="newsletter-success" style="padding-block: 0.5rem;">
+                <div class="newsletter-success-icon" aria-hidden="true" style="width: 44px; height: 44px; border-radius: 50%; background: rgba(19, 80, 27, 0.1); color: var(--green-700); display: inline-grid; place-items: center; margin: 0 auto 0.75rem;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px;"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <h4 style="margin-bottom: 0.4rem; color: #1A2E1A;">You're on the list</h4>
+                <p style="font-size: 0.95rem; color: #4A584E; margin: 0;">Thanks. The next issue will land in your inbox at <strong>${escapeHtml(emailVal)}</strong>.</p>
+              </div>
+            `;
+            container.style.opacity = '1';
+          }, 180);
+
+        }, 800);
+      });
+
+      function escapeHtml(str) {
+        return str.replace(/[&<>"']/g, function(m) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
+        });
+      }
+    })();
+    </script>
   </div>
 </section>
 
