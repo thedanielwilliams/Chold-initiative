@@ -2242,7 +2242,7 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
 
 .newsletter-body {
   font-family: var(--font-body);
-  font-size: 0.925rem;
+  font-size: 0.9rem;
   line-height: 1.55;
   color: var(--ink-soft);
   max-width: 440px;
@@ -2274,7 +2274,7 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
   border-radius: 8px 0 0 8px;
   background: var(--white);
   font-family: var(--font-body);
-  font-size: 0.925rem;
+  font-size: 0.875rem;
   color: var(--ink);
   box-sizing: border-box;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -2296,9 +2296,9 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
   padding: 0 18px;
   background: var(--green-700);
   color: var(--white) !important;
-  font-family: var(--font-display);
-  font-size: 0.925rem;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
   border: none;
   border-radius: 0 8px 8px 0;
   cursor: pointer;
@@ -2331,21 +2331,6 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
   color: #b42318;
   text-align: center;
   font-weight: 600;
-}
-
-.newsletter-bottom-text {
-  font-family: var(--font-body);
-  font-size: 0.8125rem;
-  color: var(--muted);
-  margin-top: 18px;
-  margin-bottom: 0;
-}
-
-.newsletter-bottom-text a {
-  color: var(--green-700);
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 2px;
 }
 
 @media (max-width: 520px) {
