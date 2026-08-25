@@ -2218,142 +2218,110 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
   font-size: clamp(1.35rem, 1.05rem + 1.5vw, 2.15rem);
   line-height: 1.32; letter-spacing: -.025em; color: var(--ink);
   /* --------------------------------------------------------------------------
-   Newsletter Signup Card ("Get the field reports first")
+   Newsletter Signup Card ("Get the field reports first") - Sleek & Compact
    -------------------------------------------------------------------------- */
 .newsletter-card {
   background: var(--white);
-  border: 1.5px solid var(--line);
-  border-radius: var(--r-xl);
-  padding: clamp(2.5rem, 2rem + 3vw, 3.5rem) clamp(1.5rem, 1rem + 2vw, 3rem);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 32px 24px;
   text-align: center;
-  max-width: 620px;
-  margin: 3rem auto 0;
-  box-shadow: var(--shadow-md);
-  position: relative;
-  overflow: hidden;
+  max-width: 560px;
+  margin: 2.5rem auto 0;
+  box-shadow: 0 2px 10px rgba(8, 36, 14, 0.04);
 }
 
-.newsletter-card h3,
 .newsletter-card h4 {
   font-family: var(--font-display);
-  font-size: clamp(1.6rem, 1.3rem + 1vw, 2.1rem);
+  font-size: 1.35rem;
   font-weight: 700;
   color: var(--ink);
-  margin-bottom: 0.6rem;
-  line-height: 1.25;
-  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+  line-height: 1.3;
 }
 
 .newsletter-body {
   font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 0.925rem;
+  line-height: 1.55;
   color: var(--ink-soft);
-  max-width: 480px;
-  margin: 0 auto 1.75rem;
+  max-width: 440px;
+  margin: 0 auto 20px;
 }
 
 .newsletter-form-container {
-  min-height: 120px;
+  min-height: 80px;
   transition: opacity 200ms ease;
-  max-width: 480px;
+  max-width: 450px;
   margin: 0 auto;
 }
 
-.newsletter-form-stack {
+.newsletter-form-row {
   display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
+  max-width: 440px;
   width: 100%;
-}
-
-.newsletter-input-wrap {
-  position: relative;
-  width: 100%;
-}
-
-.newsletter-input-icon {
-  position: absolute;
-  left: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--muted);
-  width: 20px;
-  height: 20px;
-  pointer-events: none;
-  display: grid;
-  place-items: center;
-}
-
-.newsletter-input-icon svg {
-  width: 18px;
-  height: 18px;
-  stroke-width: 2px;
+  margin: 0 auto;
+  align-items: stretch;
+  gap: 0;
 }
 
 .newsletter-field {
-  width: 100%;
-  height: 52px;
-  padding: 0 1rem 0 2.8rem;
-  border: 1.5px solid var(--line);
-  border-radius: var(--r-md);
+  flex: 1;
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-right: 0;
+  border-radius: 8px 0 0 8px;
   background: var(--white);
   font-family: var(--font-body);
-  font-size: 1rem;
+  font-size: 0.925rem;
   color: var(--ink);
   box-sizing: border-box;
-  transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .newsletter-field:focus {
   outline: none;
   border-color: var(--green-700);
-  box-shadow: 0 0 0 3px rgba(19, 80, 27, 0.12);
+  box-shadow: 0 0 0 2px rgba(19, 80, 27, 0.12);
 }
 
 .newsletter-field.has-error {
   border-color: #b42318 !important;
-  box-shadow: 0 0 0 3px rgba(180, 35, 24, 0.15) !important;
+  box-shadow: 0 0 0 2px rgba(180, 35, 24, 0.15) !important;
 }
 
 .newsletter-submit-btn {
-  width: 100%;
-  height: 52px;
-  padding: 0 1.75rem;
+  height: 44px;
+  padding: 0 18px;
   background: var(--green-700);
   color: var(--white) !important;
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: 0.925rem;
   font-weight: 700;
   border: none;
-  border-radius: var(--r-md);
+  border-radius: 0 8px 8px 0;
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  transition: background-color 0.25s var(--ease), transform 0.2s var(--ease), box-shadow 0.25s var(--ease), opacity 0.2s ease;
-  box-shadow: 0 4px 14px rgba(19, 80, 27, 0.18);
+  white-space: nowrap;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+  box-sizing: border-box;
 }
 
 .newsletter-submit-btn:hover:not(:disabled) {
   background: var(--green-800);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 22px rgba(19, 80, 27, 0.28);
 }
 
 .newsletter-submit-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-  transform: none;
 }
 
 /* Sub-form text / Error slot */
 .newsletter-sub-slot {
   font-family: var(--font-body);
-  font-size: 0.85rem;
+  font-size: 0.8125rem;
   color: var(--muted);
-  margin-top: 0.75rem;
+  margin-top: 10px;
   margin-bottom: 0;
   text-align: center;
   transition: color 0.2s ease;
@@ -2367,19 +2335,33 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
 
 .newsletter-bottom-text {
   font-family: var(--font-body);
-  font-size: 0.85rem;
+  font-size: 0.8125rem;
   color: var(--muted);
-  margin-top: 1.75rem;
+  margin-top: 18px;
   margin-bottom: 0;
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--line-soft);
 }
 
 .newsletter-bottom-text a {
   color: var(--green-700);
   font-weight: 600;
   text-decoration: underline;
-  text-underline-offset: 3px;
+  text-underline-offset: 2px;
+}
+
+@media (max-width: 520px) {
+  .newsletter-form-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .newsletter-field {
+    border-right: 1px solid var(--line);
+    border-radius: 8px;
+    width: 100%;
+  }
+  .newsletter-submit-btn {
+    border-radius: 8px;
+    width: 100%;
+  }
 }
 
 /* Back to top */
