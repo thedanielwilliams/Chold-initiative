@@ -167,8 +167,10 @@
     head.addEventListener('click', function () {
       var expanded = head.getAttribute('aria-expanded') === 'true';
       var panel = document.getElementById(head.getAttribute('aria-controls'));
+      var card = head.closest('.acc');
       head.setAttribute('aria-expanded', String(!expanded));
       if (panel) panel.classList.toggle('is-open', !expanded);
+      if (card) card.classList.toggle('is-open', !expanded);
     });
   });
 

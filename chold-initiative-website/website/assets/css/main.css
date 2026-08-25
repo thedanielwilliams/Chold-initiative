@@ -1268,38 +1268,41 @@ a.card:hover h3, a.card:hover h4 { color: var(--green-700); }
 /* --------------------------------------------------------------------------
    15. Accordion (careers / FAQ)
    -------------------------------------------------------------------------- */
-.acc { border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; background: #fff; }
-.acc + .acc { margin-top: .9rem; }
+.acc-wrap { max-width: 720px; }
+.acc { border: 1px solid #e3e1da; border-radius: 12px; overflow: hidden; background: #ffffff; transition: box-shadow 200ms ease, border-left-color 200ms ease, border-left-width 200ms ease; }
+.acc + .acc { margin-top: 12px; }
+.acc:hover { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); }
+.acc.is-open, .acc:has(.acc-head[aria-expanded="true"]) { border-left: 3px solid #1e3a23; }
 .acc-head {
   width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1.2rem;
   background: transparent; border: 0; cursor: pointer; text-align: left;
-  padding: 1.35rem clamp(1.1rem,.9rem+.6vw,1.7rem);
-  font-family: var(--font-display); font-weight: 700; font-size: 1.03rem; color: var(--ink);
-  transition: background .22s var(--ease);
+  padding: 24px 28px;
+  font-family: var(--font-display); font-weight: 600; font-size: 18px; color: var(--ink);
+  transition: none;
 }
-.acc-head:hover { background: var(--green-050); }
-.acc-head .acc-meta { display: block; font-size: .78rem; font-weight: 600; color: var(--muted); margin-top: .3rem; letter-spacing: .02em; }
+.acc-head:hover { background: transparent; }
+.acc-head .acc-meta { display: block; font-size: 14px; font-weight: 400; color: #6b6f66; margin-top: 6px; letter-spacing: normal; }
 .acc-icon {
   position: relative;
-  flex: none; width: 30px; height: 30px; border-radius: 50%;
-  border: 1.5px solid var(--line); display: grid; place-items: center;
-  transition: transform .3s var(--ease), background .3s var(--ease), border-color .3s var(--ease);
+  flex: none; width: 36px; height: 36px; border-radius: 50%;
+  background: #1e3a23; border: none; display: grid; place-items: center;
+  transition: transform 200ms ease;
 }
 .acc-icon::before, .acc-icon::after {
-  content: ''; position: absolute; background: var(--green-700); border-radius: 2px;
-  transition: opacity .25s var(--ease), background .25s var(--ease);
+  content: ''; position: absolute; background: #ffffff; border-radius: 1px;
+  transition: none;
 }
-.acc-icon::before { width: 12px; height: 2px; }
-.acc-icon::after  { width: 2px; height: 12px; }
-.acc-head[aria-expanded="true"] .acc-icon { background: var(--green-700); border-color: var(--green-700); transform: rotate(180deg); }
-.acc-head[aria-expanded="true"] .acc-icon::before { background: #fff; }
-.acc-head[aria-expanded="true"] .acc-icon::after { opacity: 0; }
-.acc-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .34s var(--ease); }
+.acc-icon::before { width: 14px; height: 2px; }
+.acc-icon::after  { width: 2px; height: 14px; }
+.acc-head[aria-expanded="true"] .acc-icon { background: #1e3a23; transform: rotate(45deg); }
+.acc-head[aria-expanded="true"] .acc-icon::before,
+.acc-head[aria-expanded="true"] .acc-icon::after { background: #ffffff; opacity: 1; }
+.acc-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 200ms ease; }
 .acc-panel.is-open { grid-template-rows: 1fr; }
 .acc-panel > div { overflow: hidden; }
-.acc-inner { padding: 0 clamp(1.1rem,.9rem+.6vw,1.7rem) 1.6rem; }
-.acc-inner p, .acc-inner li { font-size: var(--fs-sm); }
-.acc-inner h5 { font-family: var(--font-display); font-size: .82rem; text-transform: uppercase; letter-spacing: .1em; color: var(--green-700); margin: 1.3rem 0 .55rem; }
+.acc-inner { padding: 0 28px 24px; }
+.acc-inner p, .acc-inner li { font-size: 16px; line-height: 1.6; }
+.acc-inner h5 { font-family: var(--font-display); font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.08em; color: #1e3a23; margin: 1.2rem 0 0.5rem; }
 
 /* --------------------------------------------------------------------------
    16. Forms
