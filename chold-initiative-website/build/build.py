@@ -57,9 +57,12 @@ HEAD = """<!DOCTYPE html>
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{description}">
 <meta property="og:url" content="{canonical}">
-<meta property="og:image" content="https://www.choldinitiative.org/assets/img/hero-pastoral.jpg">
+<meta property="og:image" content="https://www.choldinitiative.org/assets/img/og-share.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="CHOLD Initiative - Pastoralist herder with livestock illustration">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://www.choldinitiative.org/assets/img/hero-pastoral.jpg">
+<meta name="twitter:image" content="https://www.choldinitiative.org/assets/img/og-share.png">
 
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/img/logo-mark.png">
