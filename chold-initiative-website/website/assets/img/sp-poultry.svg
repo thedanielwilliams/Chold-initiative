@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <g stroke="#1C3A22" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Tail Plumes -->
+    <path d="M 125 95 C 145 65 170 55 175 75 C 160 85 145 95 135 105 Z" fill="#1C3A22" />
+    <path d="M 130 90 C 155 60 178 70 170 88 Z" fill="#D4AF37" />
+
+    <!-- Legs & Claws -->
+    <path d="M 108 132 L 112 172 L 102 172 M 112 172 L 120 172 M 112 172 L 110 176" fill="none" stroke="#D4A017" stroke-width="3" />
+    <path d="M 90 132 L 92 172 L 82 172 M 92 172 L 100 172 M 92 172 L 90 176" fill="none" stroke="#D4A017" stroke-width="3" />
+
+    <!-- Body -->
+    <path d="M 72 90 Q 95 82 130 95 Q 142 110 130 132 Q 100 142 75 132 Q 60 120 72 90 Z" fill="#F6F5F0" />
+    <!-- Wing overlay -->
+    <path d="M 82 98 Q 105 92 124 105 Q 120 125 95 128 Q 78 122 82 98 Z" fill="#D4AF37" />
+
+    <!-- Neck & Hackle -->
+    <path d="M 65 110 L 75 88 L 60 52 L 48 76 L 56 102 Z" fill="#D4AF37" />
+
+    <!-- Head & Beak -->
+    <path d="M 60 52 Q 52 46 48 54 Q 54 62 60 62 Z" fill="#D4AF37" />
+    <!-- Beak -->
+    <path d="M 48 54 L 38 57 L 46 61 Z" fill="#D4A017" />
+
+    <!-- Comb (Bright Red) -->
+    <path d="M 50 48 C 48 38 54 36 56 42 C 58 36 64 38 62 46 C 66 42 70 46 65 52 Z" fill="#C93B2B" />
+
+    <!-- Wattle (Bright Red) -->
+    <path d="M 48 62 Q 44 72 50 72 Q 52 65 48 62 Z" fill="#C93B2B" />
+
+    <!-- Eye -->
+    <circle cx="53" cy="54" r="2" fill="#1C3A22" stroke="none" />
+  </g>
+</svg>

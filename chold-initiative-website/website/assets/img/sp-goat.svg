@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <g stroke="#1C3A22" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Short Upright Tail -->
+    <path d="M 152 92 L 160 76 Q 154 78 148 92 Z" fill="#B84A2A" />
+
+    <!-- Back Legs -->
+    <path d="M 136 115 L 138 170 L 130 170 L 128 115 Z" fill="#96381E" />
+    <path d="M 102 115 L 100 170 L 92 170 L 94 115 Z" fill="#96381E" />
+    <rect x="130" y="163" width="8" height="7" fill="#1C3A22" stroke="none" />
+    <rect x="92" y="163" width="8" height="7" fill="#1C3A22" stroke="none" />
+
+    <!-- Front Legs -->
+    <path d="M 144 112 L 148 170 L 138 170 L 134 112 Z" fill="#B84A2A" />
+    <path d="M 94 112 L 92 170 L 84 170 L 86 112 Z" fill="#B84A2A" />
+    <rect x="138" y="163" width="10" height="7" fill="#1C3A22" stroke="none" />
+    <rect x="84" y="163" width="8" height="7" fill="#1C3A22" stroke="none" />
+
+    <!-- Body (Compact Reddish-Brown) -->
+    <path d="M 68 84 Q 92 76 130 80 Q 152 84 150 110 Q 142 124 122 122 Q 90 124 68 118 Q 54 112 52 96 Q 56 86 68 84 Z" fill="#B84A2A" />
+
+    <!-- Beard -->
+    <path d="M 38 98 Q 34 108 30 114 Q 42 108 42 98 Z" fill="#96381E" stroke="none" />
+
+    <!-- Neck & Head -->
+    <path d="M 54 96 L 64 80 L 52 56 L 34 76 L 44 98 Z" fill="#B84A2A" />
+    <!-- Muzzle -->
+    <path d="M 34 76 L 28 82 Q 32 88 38 85 Z" fill="#1C3A22" />
+
+    <!-- Ears -->
+    <path d="M 54 62 Q 66 64 64 72 Q 54 72 50 64 Z" fill="#96381E" />
+
+    <!-- Short Upright Horns -->
+    <path d="M 48 58 Q 44 38 38 32 Q 44 42 50 56 Z" fill="#1C3A22" />
+    <path d="M 54 58 Q 54 38 52 32 Q 56 42 56 56 Z" fill="#1C3A22" />
+
+    <!-- Eye -->
+    <circle cx="44" cy="70" r="2.5" fill="#1C3A22" stroke="none" />
+  </g>
+</svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <g stroke="#1C3A22" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Tail -->
+    <path d="M 160 105 L 165 140" fill="none" />
+    <circle cx="165" cy="142" r="3" fill="#1C3A22" stroke="none" />
+
+    <!-- Back Legs -->
+    <path d="M 146 118 L 148 175 L 138 175 L 136 118 Z" fill="#A8844E" />
+    <path d="M 112 118 L 110 175 L 102 175 L 104 118 Z" fill="#A8844E" />
+    <ellipse cx="143" cy="174" rx="6" ry="3" fill="#1C3A22" stroke="none" />
+    <ellipse cx="106" cy="174" rx="6" ry="3" fill="#1C3A22" stroke="none" />
+
+    <!-- Front Legs -->
+    <path d="M 154 115 L 158 175 L 148 175 L 144 115 Z" fill="#C5A368" />
+    <path d="M 104 115 L 102 175 L 94 175 L 96 115 Z" fill="#C5A368" />
+    <ellipse cx="153" cy="174" rx="6" ry="3" fill="#1C3A22" stroke="none" />
+    <ellipse cx="98" cy="174" rx="6" ry="3" fill="#1C3A22" stroke="none" />
+
+    <!-- Single Hump (Defining Dromedary feature) -->
+    <path d="M 94 82 Q 115 48 136 82 Z" fill="#C5A368" />
+    <path d="M 102 78 Q 115 54 128 78 Z" fill="#A8844E" stroke="none" />
+
+    <!-- Body -->
+    <path d="M 65 92 Q 80 82 94 82 Q 136 82 158 88 Q 166 94 162 118 Q 152 130 132 126 Q 92 128 65 120 Z" fill="#C5A368" />
+
+    <!-- Long Curved Neck & Head -->
+    <path d="M 68 116 Q 44 100 48 64 Q 50 48 42 44 L 28 50 Q 34 60 38 58 Q 42 78 60 98 Z" fill="#C5A368" />
+
+    <!-- Head muzzle detail -->
+    <path d="M 42 44 L 30 46 Q 28 52 34 52 Z" fill="#A8844E" />
+
+    <!-- Small Ear -->
+    <path d="M 48 44 Q 52 38 54 44 Z" fill="#A8844E" />
+
+    <!-- Eye -->
+    <circle cx="42" cy="48" r="2" fill="#1C3A22" stroke="none" />
+  </g>
+</svg>

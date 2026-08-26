@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <g stroke="#1C3A22" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Long Tail -->
+    <path d="M 158 108 L 162 145" fill="none" />
+
+    <!-- Back Legs (Tall, slender) -->
+    <path d="M 142 118 L 144 175 L 136 175 L 134 118 Z" fill="#E5E0D5" />
+    <path d="M 108 118 L 106 175 L 98 175 L 100 118 Z" fill="#E5E0D5" />
+    <rect x="136" y="168" width="8" height="7" fill="#1C3A22" stroke="none" />
+    <rect x="98" y="168" width="8" height="7" fill="#1C3A22" stroke="none" />
+
+    <!-- Front Legs -->
+    <path d="M 150 115 L 154 175 L 144 175 L 140 115 Z" fill="#F6F5F0" />
+    <path d="M 100 115 L 98 175 L 90 175 L 92 115 Z" fill="#F6F5F0" />
+    <rect x="144" y="168" width="10" height="7" fill="#1C3A22" stroke="none" />
+    <rect x="90" y="168" width="8" height="7" fill="#1C3A22" stroke="none" />
+
+    <!-- Body Fleece -->
+    <path d="M 70 82 Q 95 72 135 76 Q 160 80 158 110 Q 150 126 128 124 Q 92 126 70 120 Q 56 114 54 96 Q 56 86 70 82 Z" fill="#F6F5F0" />
+
+    <!-- Neck & Head (Roman Nose Profile) -->
+    <path d="M 58 96 L 68 80 L 52 54 C 42 56 32 66 28 78 C 30 88 40 92 50 88 L 58 96 Z" fill="#F6F5F0" />
+
+    <!-- Long Drooping Ears (defining feature of Balami) -->
+    <path d="M 50 62 C 58 66 62 82 56 100 C 50 96 46 80 50 62 Z" fill="#E5E0D5" />
+
+    <!-- Eye -->
+    <circle cx="42" cy="68" r="2.5" fill="#1C3A22" stroke="none" />
+  </g>
+</svg>
