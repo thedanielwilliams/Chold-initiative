@@ -14,7 +14,7 @@ import re
 HERE = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.normpath(os.path.join(HERE, '..', 'website'))
 PAGES = os.path.join(HERE, 'pages')
-BASE_URL = 'https://choldinitiative.org'
+BASE_URL = 'https://www.choldinitiative.org'
 
 NAV = [
     ('index.html', 'Home'),
@@ -49,16 +49,17 @@ HEAD = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{description}">
-<link rel="canonical" href="{base}/{slug}">
+<link rel="canonical" href="{canonical}">
 <meta name="theme-color" content="#13501B">
 
 <meta property="og:type" content="{ogtype}">
 <meta property="og:site_name" content="CHOLD Initiative">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{description}">
-<meta property="og:url" content="{base}/{slug}">
-<meta property="og:image" content="{base}/assets/img/{ogimage}">
+<meta property="og:url" content="{canonical}">
+<meta property="og:image" content="https://www.choldinitiative.org/assets/img/hero-pastoral.jpg">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.choldinitiative.org/assets/img/hero-pastoral.jpg">
 
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/img/logo-mark.png">
@@ -209,6 +210,7 @@ def build():
             meta, body = parse_front_matter(f.read())
 
         slug = meta.get('slug', name)
+        canonical_url = f"{BASE_URL}/" if (slug == 'index.html' or slug == '') else f"{BASE_URL}/{slug}"
         jsonld = meta.get('jsonld')
         if jsonld:
             with open(os.path.join(PAGES, jsonld), encoding='utf-8') as jf:
@@ -219,10 +221,11 @@ def build():
         html = HEAD.format(
             title=meta.get('title', 'CHOLD Initiative'),
             description=meta.get('description', ''),
+            canonical=canonical_url,
             base=BASE_URL,
             slug='' if slug == 'index.html' else slug,
             ogtype=meta.get('ogtype', 'website'),
-            ogimage=meta.get('ogimage', 'hero-pastoral.jpg'),
+            ogimage='hero-pastoral.jpg',
             jsonld=jsonld_text,
         )
         html += HEADER.format(

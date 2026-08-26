@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://choldinitiative.org/sitemap.xml
+Sitemap: https://www.choldinitiative.org/sitemap.xml

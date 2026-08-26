@@ -79,7 +79,7 @@ add `netlify` and `name="contact"` attributes to the `<form>` tag instead of `da
 | Item | Where | Note |
 |---|---|---|
 | Social media URLs | Footer of every page + `contact.html` | Currently point to the LinkedIn / Facebook / X home pages. Replace with the real CHOLD profiles. |
-| Domain in metadata | `<link rel="canonical">`, `og:url`, `sitemap.xml`, `robots.txt` | All assume `https://choldinitiative.org`. Change if the domain differs. |
+| Domain in metadata | `<link rel="canonical">`, `og:url`, `sitemap.xml`, `robots.txt` | All assume `https://www.choldinitiative.org`. |
 | News articles | `news-*.html` | Three substantive articles are included, written from the profile deck's own analysis. **Review them before publishing** — they are drafts and reflect our reading of the deck, not approved organisational statements. |
 | Careers listings | `careers.html` | Six standing opportunity areas. Replace with specific advertised roles when you have them. |
 | Photography | `assets/img/` | All images were extracted from the profile deck. Several appear to be licensed stock — **confirm usage rights before go-live**, and swap in CHOLD's own field photography where possible. See section 5. |
