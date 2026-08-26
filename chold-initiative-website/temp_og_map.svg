@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#13501B"/>
+  <!-- Nigeria silhouette -->
+  <path d="M 410.00,319.34 L 411.83,267.81 L 411.03,247.47 L 417.05,227.30 L 426.90,217.50 L 442.41,197.71 L 439.04,189.11 L 445.34,176.24 L 438.15,157.27 L 439.40,146.65 L 441.62,118.11 L 450.78,105.22 L 455.28,86.83 L 463.61,79.92 L 497.97,76.13 L 530.01,88.06 L 542.00,100.14 L 558.32,100.68 L 573.47,92.83 L 612.17,109.36 L 628.47,108.58 L 647.33,94.95 L 666.07,95.92 L 675.30,91.43 L 692.51,93.30 L 717.26,102.63 L 742.26,84.76 L 749.76,86.03 L 771.40,121.03 L 777.34,120.32 L 790.00,133.06 L 786.52,138.83 L 784.83,149.46 L 757.89,174.20 L 749.44,194.60 L 744.93,211.22 L 738.15,218.35 L 731.70,240.73 L 714.60,253.90 L 709.65,270.08 L 702.47,282.95 L 699.47,296.24 L 677.51,307.01 L 659.56,293.88 L 647.44,294.41 L 628.40,313.12 L 619.14,313.41 L 603.94,344.25 L 595.71,366.88 L 562.52,378.39 L 550.38,376.70 L 538.09,383.87 L 512.52,383.17 L 495.40,363.17 L 484.87,340.03 L 462.24,318.96 L 438.21,319.36 L 410.00,319.34 Z" fill="#F5F1E8"/>
+  
+  <!-- Wordmark + Subtitle -->
+  <text x="600" y="450" text-anchor="middle" fill="#F5F1E8" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="36" font-weight="800" letter-spacing="-0.02em">CHOLD Initiative</text>
+  <text x="600" y="492" text-anchor="middle" fill="#F5F1E8" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="500" opacity="0.9">Livestock data and disease surveillance</text>
+  
+  <!-- Safe zone box (630x630 centered) debug border optional -->
+</svg>
