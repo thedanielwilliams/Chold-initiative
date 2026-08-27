@@ -38,7 +38,13 @@ ORG_JSONLD = {
     "slogan": "Empowering Livestock Communities, Securing Africa's Future",
     "description": "A non-profit organisation transforming livestock ecosystems through "
                    "innovation, research, data intelligence and inclusive leadership engagement.",
-    "address": {"@type": "PostalAddress", "addressLocality": "Abuja", "addressCountry": "NG"},
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "11 Ukpo Close, off Twon Brass Street, off Mohammed Buhari Way, Garki II",
+        "addressLocality": "Abuja",
+        "addressRegion": "Federal Capital Territory",
+        "addressCountry": "NG"
+    },
     "areaServed": {"@type": "Place", "name": "Africa"},
 }
 
@@ -157,7 +163,7 @@ FOOTER = """
       <div>
         <h5>Contact</h5>
         <ul class="footer-links">
-          <li>Abuja, Federal Capital Territory<br>Nigeria</li>
+          <li>11 Ukpo Close, off Twon Brass Street,<br>off Mohammed Buhari Way, Garki II,<br>Abuja, Nigeria</li>
           <li><a href="mailto:info@choldinitiative.org">info@choldinitiative.org</a></li>
           <li><a href="tel:+2348171111551">+234 (081) 7111 1551</a></li>
         </ul>
