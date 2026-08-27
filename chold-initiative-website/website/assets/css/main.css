@@ -363,6 +363,32 @@ strong { color: var(--ink); font-weight: 650; }
   overflow: hidden;
 }
 
+.hero-redesign.hero-single-column {
+  grid-template-columns: 1fr;
+  min-height: 72vh;
+}
+
+.hero-redesign.hero-single-column .hero-left {
+  align-items: center;
+  text-align: center;
+  padding: calc(var(--header-h, 80px) + 3.5rem) 6vw 5rem 6vw;
+}
+
+.hero-redesign.hero-single-column .hero-left-content {
+  max-width: 820px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-redesign.hero-single-column .hero-subtext {
+  max-width: 64ch;
+}
+
+.hero-redesign.hero-single-column .hero-btn-row {
+  justify-content: center;
+}
+
 .hero-left {
   background-color: #1c3a22;
   display: flex;
