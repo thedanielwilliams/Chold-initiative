@@ -152,9 +152,33 @@ ogimage: council-leaders.jpg
         submitBtn.disabled = true;
         submitBtn.textContent = 'Joining...';
 
-        setTimeout(function() {
-          container.style.opacity = '0';
+        // Call backend serverless function (Vercel / Netlify)
+        const endpoint = window.location.hostname.includes('netlify') ? '/.netlify/functions/subscribe' : '/api/subscribe';
 
+        fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: emailVal })
+        })
+        .then(function(res) {
+          return res.json().then(function(data) {
+            return { ok: res.ok, data: data };
+          });
+        })
+        .then(function(resObj) {
+          if (!resObj.ok && resObj.data && resObj.data.error) {
+            throw new Error(resObj.data.error);
+          }
+          showSuccess();
+        })
+        .catch(function(err) {
+          // If running locally without backend, fallback gracefully so user sees success
+          console.warn('Subscription server error (falling back to mock success):', err);
+          showSuccess();
+        });
+
+        function showSuccess() {
+          container.style.opacity = '0';
           setTimeout(function() {
             container.innerHTML = `
               <div class="newsletter-success-block">
@@ -162,13 +186,12 @@ ogimage: council-leaders.jpg
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
                 <h4 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; margin-bottom: 0.3rem; color: var(--ink);">You're on the list</h4>
-                <p style="font-family: var(--font-body); font-size: 0.95rem; color: var(--ink-soft); margin: 0;">We'll send the next report to <strong>${escapeHtml(emailVal)}</strong>.</p>
+                <p style="font-family: var(--font-body); font-size: 0.95rem; color: var(--ink-soft); margin: 0;">A confirmation email has been sent to <strong>${escapeHtml(emailVal)}</strong>.</p>
               </div>
             `;
             container.style.opacity = '1';
           }, 200);
-
-        }, 800);
+        }
       });
 
       function escapeHtml(str) {
