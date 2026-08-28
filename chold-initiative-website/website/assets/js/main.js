@@ -247,18 +247,51 @@
       }
 
       if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+
+      var isApplyEndpoint = endpoint.includes('/api/apply') || endpoint.includes('functions/apply');
+      var reqHeaders = { 'Accept': 'application/json' };
+      var reqBody;
+
+      if (isApplyEndpoint) {
+        if (window.location.hostname.includes('netlify')) {
+          endpoint = '/.netlify/functions/apply';
+        }
+        reqHeaders['Content-Type'] = 'application/json';
+        reqBody = JSON.stringify({
+          name: (form.querySelector('[name="Full name"]') || {}).value || '',
+          email: (form.querySelector('[name="Email"]') || {}).value || '',
+          phone: (form.querySelector('[name="Phone"]') || {}).value || '',
+          location: (form.querySelector('[name="Location"]') || {}).value || '',
+          area: (form.querySelector('[name="Opportunity area"]') || {}).value || '',
+          type: (form.querySelector('[name="Engagement type"]') || {}).value || '',
+          cv: (form.querySelector('[name="CV link"]') || {}).value || '',
+          message: (form.querySelector('[name="Message"]') || {}).value || ''
+        });
+      } else {
+        reqBody = new FormData(form);
+      }
+
       fetch(endpoint, {
         method: 'POST',
-        body: new FormData(form),
-        headers: { Accept: 'application/json' }
+        body: reqBody,
+        headers: reqHeaders
       }).then(function (res) {
-        if (res.ok) {
+        return res.json().then(function (data) {
+          return { ok: res.ok, data: data };
+        });
+      }).then(function (resObj) {
+        if (resObj.ok) {
           form.reset();
-          showStatus('ok', 'Thank you. Your message has reached the CHOLD Initiative team — we typically respond within three working days.');
+          if (isApplyEndpoint) {
+            showStatus('ok', 'Thank you for applying! We have received your application. A confirmation email has been sent to your inbox. If your background matches our requirements, we will contact you directly.');
+          } else {
+            showStatus('ok', 'Thank you. Your message has reached the CHOLD Initiative team — we typically respond within three working days.');
+          }
         } else {
-          showStatus('err', 'Something went wrong sending your message. Please email info@choldinitiative.org instead.');
+          showStatus('err', (resObj.data && resObj.data.error) ? resObj.data.error : 'Something went wrong sending your message. Please email info@choldinitiative.org instead.');
         }
-      }).catch(function () {
+      }).catch(function (err) {
+        console.warn('Form submit error:', err);
         showStatus('err', 'We could not reach the server. Please check your connection or email info@choldinitiative.org.');
       }).finally(function () {
         if (btn) { btn.disabled = false; btn.textContent = original; }
