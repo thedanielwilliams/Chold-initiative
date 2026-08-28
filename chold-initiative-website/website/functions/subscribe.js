@@ -13,7 +13,8 @@ exports.handler = async function(event, context) {
   }
 
   const { email } = body;
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+  const cleanEmail = email ? email.trim() : '';
+  if (!cleanEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
     return { statusCode: 400, body: JSON.stringify({ error: "Please enter a valid email address." }) };
   }
 
@@ -22,8 +23,11 @@ exports.handler = async function(event, context) {
     return { statusCode: 500, body: JSON.stringify({ error: "Resend API key missing on server." }) };
   }
 
+  const senderAddress = 'CHOLD Initiative <info@choldinitiative.org>';
+
   try {
-    const response = await fetch('https://api.resend.com/emails', {
+    // 1. Welcome email to subscriber
+    const welcomePromise = fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
@@ -31,8 +35,8 @@ exports.handler = async function(event, context) {
         'User-Agent': 'Resend/1.0'
       },
       body: JSON.stringify({
-        from: 'CHOLD Initiative <onboarding@resend.dev>',
-        to: [email.trim()],
+        from: senderAddress,
+        to: [cleanEmail],
         subject: 'Welcome to CHOLD Initiative Newsletter',
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #222; line-height: 1.6; padding: 20px;">
@@ -56,12 +60,41 @@ exports.handler = async function(event, context) {
       })
     });
 
-    const data = await response.json();
-    if (!response.ok) {
-      return { statusCode: response.status, body: JSON.stringify({ error: data.message || "Failed to send welcome email." }) };
+    // 2. Admin notification email
+    const adminNotifyPromise = fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+        'User-Agent': 'Resend/1.0'
+      },
+      body: JSON.stringify({
+        from: senderAddress,
+        to: ['info@choldinitiative.org'],
+        subject: `New Newsletter Subscriber: ${cleanEmail}`,
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #222; line-height: 1.6; padding: 20px;">
+            <div style="background-color: #13501B; padding: 15px 20px; border-radius: 6px 6px 0 0; color: #FFFFFF;">
+              <h2 style="margin: 0; font-size: 18px;">New Newsletter Subscriber Alert</h2>
+            </div>
+            <div style="background-color: #F7F4EC; padding: 20px; border: 1px solid #E5E5E5; border-radius: 0 0 6px 6px;">
+              <p style="margin-top: 0;">A new user has just subscribed to the newsletter on the website.</p>
+              <p><strong>Subscriber Email:</strong> <a href="mailto:${cleanEmail}" style="color: #13501B; font-weight: bold;">${cleanEmail}</a></p>
+              <p style="font-size: 12px; color: #777; margin-bottom: 0;">CHOLD Initiative Website Auto-notification</p>
+            </div>
+          </div>
+        `
+      })
+    });
+
+    const [welcomeRes] = await Promise.all([welcomePromise, adminNotifyPromise]);
+    const welcomeData = await welcomeRes.json();
+
+    if (!welcomeRes.ok) {
+      return { statusCode: welcomeRes.status, body: JSON.stringify({ error: welcomeData.message || "Failed to send welcome email." }) };
     }
 
-    return { statusCode: 200, body: JSON.stringify({ success: true, id: data.id }) };
+    return { statusCode: 200, body: JSON.stringify({ success: true, id: welcomeData.id }) };
   } catch (err) {
     return { statusCode: 500, body: JSON.stringify({ error: "Server error processing subscription." }) };
   }
